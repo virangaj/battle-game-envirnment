@@ -27,6 +27,9 @@
     <ClCompile Include="watch_tower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="watchtower.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project.h">

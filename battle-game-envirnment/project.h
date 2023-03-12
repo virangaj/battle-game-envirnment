@@ -10,5 +10,5 @@ void ground();
 void plane();
 void groupPlanes();
 
-//can be found in watch_Towe.cpp
+//can be found in watch_Tower.cpp
 void watchTower();
