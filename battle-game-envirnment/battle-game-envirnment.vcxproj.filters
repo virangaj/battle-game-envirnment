@@ -24,9 +24,6 @@
     <ClCompile Include="plane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="watch_tower.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="watchtower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

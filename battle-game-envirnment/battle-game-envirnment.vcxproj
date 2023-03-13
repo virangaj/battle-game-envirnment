@@ -134,7 +134,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="watchtower.cpp" />
-    <ClCompile Include="watch_tower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project.h" />
