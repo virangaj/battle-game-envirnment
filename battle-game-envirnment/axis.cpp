@@ -71,7 +71,7 @@ float textureCordinates[] = {
 void ground() {
 
     glPushMatrix();
-   
+
 
     glColor3f(0.1f, 0.1f, 0.0f);
     glBegin(GL_POLYGON);

@@ -116,7 +116,7 @@ void plane() {
 
 
 void groupPlanes() {
-   
+
     glPushMatrix();
     glRotatef(-90, 0, 1, 0);
     glScalef(0.5, 0.5, 0.5);
@@ -124,7 +124,7 @@ void groupPlanes() {
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(-3,0,-3);
+    glTranslatef(-3, 0, -3);
     glRotatef(-90, 0, 1, 0);
     glScalef(0.5, 0.5, 0.5);
     plane();

@@ -65,7 +65,7 @@ void display() {
     glLightfv(GL_LIGHT1, GL_DIFFUSE, paleYellow);
     GLfloat green[] = { 0.0,1.0,0.0,1.0 };
     glLightfv(GL_LIGHT1, GL_SPECULAR, green);
-   
+
 
 
 
@@ -86,8 +86,6 @@ void display() {
     // groupPlanes();
     glPopMatrix();
 
-
-
     ground();
     drawAxis();
     glPopMatrix();
@@ -98,9 +96,6 @@ void display() {
 
 
 void specialKeys(int key, int x, int y) {
-
-
-
     switch (key)
     {
     case GLUT_KEY_UP:
