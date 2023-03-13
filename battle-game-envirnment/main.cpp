@@ -40,10 +40,15 @@ void display() {
 
 
     gluLookAt(5.0 + camX, 5.0 + camY, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    /* set material parameters */
+    const GLfloat blue[4] = { 0.3, 0.3, 1.0, 1.0 };
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, blue);
+    const GLfloat matwhite[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glMaterialfv(GL_FRONT, GL_SPECULAR, matwhite);
+    glMaterialf(GL_FRONT, GL_SHININESS, 128.0f);
 
-    glEnable(GL_LIGHT0);
     /* positioned the light source 1 */
-    GLfloat position0[] = { 2.0,2.0,2.0,1.0 };
+    GLfloat position0[] = { 10.0,10.0,10.0,1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, position0);
 
     /* set light intensities for light source 1 */
@@ -52,6 +57,14 @@ void display() {
     GLfloat white[] = { 1.0,1.0,1.0,1.0 };
     glLightfv(GL_LIGHT0, GL_SPECULAR, white);
 
+    /* positioned the light source 2 */
+    GLfloat position1[] = { -10.0,10.0,-10.0,1.0 };
+    glLightfv(GL_LIGHT1, GL_POSITION, position1);
+
+    /* set light intensities for light source 2 */
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, paleYellow);
+    GLfloat green[] = { 0.0,1.0,0.0,1.0 };
+    glLightfv(GL_LIGHT1, GL_SPECULAR, green);
    
 
 
@@ -170,27 +183,6 @@ void keyPress(unsigned char key, int x, int y) {
     case '4':
         glPolygonMode(GL_FRONT, GL_FILL);
         glPolygonMode(GL_BACK, GL_FILL);
-        break;
-    case 'o':
-        //open door
-        door_open = true;
-        if (door_Angle == 90) {
-            door_Angle = 90;
-        }
-        else {
-            door_Angle++;
-        }
-        break;
-    case 'c':
-        //close door
-        door_open = false;
-        if (door_Angle == 0) {
-            door_Angle = 0;
-        }
-        else {
-            door_Angle--;
-        }
-
         break;
     default:
         break;

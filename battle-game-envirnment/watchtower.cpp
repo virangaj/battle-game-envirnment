@@ -2,17 +2,17 @@
 #include <GL/glut.h> 
 
 
-
+// single tower leg
 void TowerLeg() {
 	glPushMatrix();
 	glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
-	glTranslatef(0, 2.5, 0);
-	glScalef(0.2, 5, 0.2);
+	glTranslatef(0, 2.75, 0);
+	glScalef(0.2, 5.5, 0.2);
 	glutSolidCube(1);
 	glPopMatrix();
 }
 
-
+//all tower legs
 void allTowerLegs(){
 	
 	//front left leg
@@ -41,7 +41,7 @@ void allTowerLegs(){
 	glPopMatrix();
 }
 
-
+// single ladder leg
 void ladderLeg() {
 	glPushMatrix();
 	glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
@@ -51,6 +51,8 @@ void ladderLeg() {
 	glPopMatrix();
 }
 
+
+//whole ladder
 void ladder() {
 
 	//left leg
@@ -69,7 +71,7 @@ void ladder() {
 	for (int i = 0; i < 16; i++) {
 		
 		glPushMatrix();
-		glColor4f(1.0f, 0, 0, 0);
+		glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
 		glTranslatef(0, 0.25*i, 0);
 		glScalef(0.4, 0.1, 0.1);
 		glutSolidCube(1);
@@ -78,6 +80,8 @@ void ladder() {
 	}
 }
 
+
+// floor base
 void base() {
 	glPushMatrix();
 	glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
@@ -86,22 +90,142 @@ void base() {
 	glPopMatrix();
 }
 
-void watchTower() {
+
+// roof side traingle
+void roofSide() {
+	
+	glBegin(GL_POLYGON);
+	glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
+	glVertex3f(0, 1, 0);
+	glVertex3f(-2, 0, 2);
+	glVertex3f(2, 0, 2);
+	glEnd();
+}
+
+// whole roof
+void roof() {
+	for (int i = 0; i < 4; i++) {
+
+		glPushMatrix();
+		glRotatef(90*i, 0, 1, 0);
+		roofSide();
+		glPopMatrix();
+
+	}
+}
+
+// side fence implementation
+void sideFence() {
+
+	//fence top bar
+	glPushMatrix();
+	glColor4f(1.0f, 0, 0, 1);
+	glScalef(4, 0.1, 0.1);
+	glutSolidCube(1);
+	glPopMatrix();
+
+	//middle vertical bars
+	for (int i = -3; i < 4; i++) {
+
+		glPushMatrix();
+		glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
+		glTranslatef(0.5*i, 0, 0);
+		glScalef(0.1, 0.5, 0.1);
+		glutSolidCube(1);
+		glPopMatrix();
+
+	}
+
+}
+
+// side fence implementation
+void frontHalfFence() {
+
+	//fence top bar
+	glPushMatrix();
+	glColor4f(1.0f, 0, 0, 1);
+	glScalef(1.4, 0.1, 0.1);
+	glutSolidCube(1);
+	glPopMatrix();
+
+	//middle vertical bars
+	for (int i = -1.5; i < 1.5; i++) {
+
+		glPushMatrix();
+		glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
+		glTranslatef(0.5 * i, 0, 0);
+		glScalef(0.1, 0.5, 0.1);
+		glutSolidCube(1);
+		glPopMatrix();
+
+	}
+
+}
+
+
+// fence around the base
+void fence() {
+	
+	//back
+	glPushMatrix();
+	glTranslatef(0, 0, -1.8);
+	sideFence();
+	glPopMatrix();
+
+	//left
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	glTranslatef(0, 0, -1.8);
+	sideFence();
+	glPopMatrix();
+
+	//right
+	glPushMatrix();
+	glRotatef(-90, 0, 1, 0);
+	glTranslatef(0, 0, -1.8);
+	sideFence();
+	glPopMatrix();
+
+	//front left
+	glPushMatrix();
+	glTranslatef(-1, 0, 1.8);
+	frontHalfFence();
+	glPopMatrix();
+
+	//front right
+	glPushMatrix();
+	glTranslatef(1, 0, 1.8);
+	frontHalfFence();
+	glPopMatrix();
 	
 
+}
+
+void watchTower() {
 	//floor base
 	glPushMatrix();
 	glTranslatef(0, 4, 0);
 	base();
 	glPopMatrix();
 
-	//top base
+	//roof
+	glPushMatrix();
+	glTranslatef(0, 5.35, 0);
+	roof();
+	glPopMatrix();
 
 	//legs
 	allTowerLegs();
 
+	//ladder
 	glPushMatrix();
 	glTranslatef(0, 0, 2);
 	ladder();
+	glPopMatrix();
+
+	//fence
+	glPushMatrix();
+	glTranslatef(0, 4.2, 0);
+	fence();
 	glPopMatrix();
 }
