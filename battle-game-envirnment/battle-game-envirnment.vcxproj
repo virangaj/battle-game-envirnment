@@ -130,9 +130,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="arterygun.cpp" />
     <ClCompile Include="axis.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="plane.cpp" />
+    <ClCompile Include="terrain.cpp" />
     <ClCompile Include="watchtower.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -12,3 +12,9 @@ void groupPlanes();
 
 //can be found in watch_Tower.cpp
 void watchTower();
+
+// can be found in the terrain.cpp
+void terrain();
+
+//can be found in arterygun.cpp
+void arteryGun();

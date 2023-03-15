@@ -82,7 +82,7 @@ void ladder() {
 
 
 // floor base
-void base() {
+void towerFloorBase() {
 	glPushMatrix();
 	glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
 	glScalef(4, 0.1, 4);
@@ -205,7 +205,7 @@ void watchTower() {
 	//floor base
 	glPushMatrix();
 	glTranslatef(0, 4, 0);
-	base();
+	towerFloorBase();
 	glPopMatrix();
 
 	//roof

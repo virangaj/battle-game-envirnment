@@ -1,6 +1,6 @@
 #include<GL/glut.h>
 #include "project.h"
-
+#include <math.h>
 
 #define PI 3.1415927
 
@@ -38,7 +38,8 @@ void display() {
     double a = t * 90.0;
     double aa = a;
 
-
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
     gluLookAt(5.0 + camX, 5.0 + camY, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
     /* set material parameters */
     const GLfloat blue[4] = { 0.3, 0.3, 1.0, 1.0 };
@@ -74,7 +75,7 @@ void display() {
      //house
 
     glPushMatrix();
-    watchTower();
+    //watchTower();
     drawGrid();
 
 
@@ -86,7 +87,9 @@ void display() {
     // groupPlanes();
     glPopMatrix();
 
+    terrain();
     ground();
+    arteryGun();
     drawAxis();
     glPopMatrix();
 
