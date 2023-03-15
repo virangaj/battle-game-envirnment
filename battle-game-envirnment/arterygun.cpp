@@ -34,7 +34,7 @@ void draw_cylinder(GLfloat radius,
     glEnd();
 
     /** Draw the circle on top of cylinder */
-    glColor3ub(R, G, B);
+    glColor3ub(R - 40, G - 40, B - 40);
     glBegin(GL_POLYGON);
     angle = 0.0;
     while (angle < 2 * PI) {
@@ -44,6 +44,19 @@ void draw_cylinder(GLfloat radius,
         angle = angle + angle_stepsize;
     }
     glVertex3f(radius, 0.0, height);
+
+    glColor3ub(R - 40, G - 40, B - 40);
+    glBegin(GL_POLYGON);
+    angle = 0.0;
+    while (angle < 2 * PI) {
+        x = radius * cos(angle);
+        y = radius * sin(angle);
+        glVertex3f(x, y, 0);
+        angle = angle + angle_stepsize;
+    }
+    glVertex3f(radius, 0.0, 0);
+
+
     glEnd();
 }
 
@@ -111,12 +124,106 @@ void protectiveSheild() {
 
 }
 
-void gunStructure() {
-   
+
+//stand wheel
+void wheel() {
     glPushMatrix();
+    glScalef(0.75, 1, 1);
+    glRotatef(90, 0, 1, 0);
+    draw_cylinder(1, 1, 50, 50, 50);
+    glPopMatrix();
+}
+
+
+//behind bar structure
+void behindBars() {
+
+    glPushMatrix();
+    glTranslatef(-0.5, 0, -4);
+    glRotatef(-10, 0, 1, 0);
+    glScalef(0.5, 0.5, 8);
+    glColor3f(0, 0, 1);
+    glutSolidCube(1);
+    glPopMatrix();
+
+
+
+    glPushMatrix();
+    glTranslatef(0.5, 0, -4);
+    glRotatef(10, 0, 1, 0);
+    glScalef(0.5, 0.5, 8);
+    glColor3f(0, 0, 1);
+    glutSolidCube(1);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(0, 0, -8);
+    glColor3f(0, 0, 1);
+    glutSolidCube(1.5);
+    glPopMatrix();
+}
+
+//gun base stand
+void baseStand() {
+
+    //wheel holder
+    glPushMatrix();
+    glTranslatef(-3, 0, 0);
+    glScalef(6, 0.125, 0.125);
+    glRotatef(90, 0, 1, 0);
+    draw_cylinder(1, 1, 100, 100, 100);
+    glPopMatrix();
+
+
+    //left wheel
+    glPushMatrix();
+    glTranslatef(-3.25, 0, 0);
+    wheel();
+    glPopMatrix();
+
+    //right wheel
+    glPushMatrix();
+    glTranslatef(2.5, 0, 0);
+    wheel();
+    glPopMatrix();
+
+    // base stand
+    glPushMatrix();
+    glScalef(4, 0.5, 2);
+    glRotatef(45, 1, 0, 0);
+    glColor3f(1, 0, 0);
+    glutSolidCube(1);
+    glPopMatrix();
+
+    //left bar
+    behindBars();
+
+    
+    //right bar
+
+}
+
+
+
+// whole gun base
+void gunBase() {
+    
+    glPushMatrix();
+    glTranslatef(0, 0.5, 0);
+    baseStand();
+    glPopMatrix();
+}
+
+
+// gun structure
+void gunStructure() {
+
+    glPushMatrix();
+
     protectiveSheild();
 
-    glPushMatrix(); 
+    glPushMatrix();
     glTranslatef(0, 0, 0.5);
     maincylinderbarel();
     glPopMatrix();
@@ -126,11 +233,17 @@ void gunStructure() {
 
 }
 
-
+//whole gun
 void arteryGun(){
     glPushMatrix();
-    glTranslatef(0, 4, 0);
+    glTranslatef(0, 1.75, 0);
     glRotatef(-40, 1, 0, 0);
+    glScalef(1.5, 1.5, 1.5);
     gunStructure();
+    glPopMatrix();
+
+
+    glPushMatrix();
+    gunBase();
     glPopMatrix();
 }

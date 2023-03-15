@@ -18,3 +18,7 @@ void terrain();
 
 //can be found in arterygun.cpp
 void arteryGun();
+
+
+//can be found in components.cpp
+//void draw_cylinder(GLfloat radius, GLfloat height, GLubyte R, GLubyte G, GLubyte B);

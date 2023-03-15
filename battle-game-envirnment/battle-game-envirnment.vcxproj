@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClCompile Include="arterygun.cpp" />
     <ClCompile Include="axis.cpp" />
+    <ClCompile Include="components.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="terrain.cpp" />
