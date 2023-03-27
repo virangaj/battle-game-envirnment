@@ -89,7 +89,13 @@ void display() {
 
     terrain();
     ground();
+
+    //artilleryShell();
+    //artilleryAmmoCrate();
+    glPushMatrix();
     arteryGun();
+    glPopMatrix();
+    
     drawAxis();
     glPopMatrix();
 

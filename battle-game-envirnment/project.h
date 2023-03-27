@@ -20,5 +20,9 @@ void terrain();
 void arteryGun();
 
 
-//can be found in components.cpp
-//void draw_cylinder(GLfloat radius, GLfloat height, GLubyte R, GLubyte G, GLubyte B);
+
+
+//can be found in arteryshell.cpp
+void artilleryShell();
+void artilleryEmptyShell();
+void artilleryAmmoCrate();

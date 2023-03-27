@@ -9,9 +9,9 @@
 
 void draw_cylinder(GLfloat radius,
     GLfloat height,
-    GLubyte R,
-    GLubyte G,
-    GLubyte B)
+    GLfloat R,
+    GLfloat G,
+    GLfloat B)
 {
     GLfloat x = 0.0;
     GLfloat y = 0.0;
@@ -19,7 +19,7 @@ void draw_cylinder(GLfloat radius,
     GLfloat angle_stepsize = 0.1;
 
     /** Draw the tube */
-    glColor3ub(R - 40, G - 40, B - 40);
+    glColor3f(R, G, B);
     glBegin(GL_QUAD_STRIP);
     angle = 0.0;
     while (angle < 2 * PI) {
@@ -34,7 +34,7 @@ void draw_cylinder(GLfloat radius,
     glEnd();
 
     /** Draw the circle on top of cylinder */
-    glColor3ub(R - 40, G - 40, B - 40);
+    glColor3f(R, G, B);
     glBegin(GL_POLYGON);
     angle = 0.0;
     while (angle < 2 * PI) {
@@ -45,7 +45,7 @@ void draw_cylinder(GLfloat radius,
     }
     glVertex3f(radius, 0.0, height);
 
-    glColor3ub(R - 40, G - 40, B - 40);
+    glColor3f(R, G, B);
     glBegin(GL_POLYGON);
     angle = 0.0;
     while (angle < 2 * PI) {
@@ -73,7 +73,7 @@ void maincylinderbarel() {
     glutSolidCone(0.25, 1, 20, 20);
     glPopMatrix();
 
-    draw_cylinder(0.125, 3, 100, 100, 100);
+    draw_cylinder(0.125, 3, 0.1, 0.1, 0.0);
 }
 
 // shield one side
@@ -101,7 +101,10 @@ void gunShieldRectangle(){
 void protectiveSheild() {
     
     // base of the gun
+    glPushMatrix();
+    glColor3f(0.1, 0.1, 0);
     glutSolidCube(1);
+    glPopMatrix();
 
     //left -> gun sheilds
     glPushMatrix();
@@ -130,7 +133,7 @@ void wheel() {
     glPushMatrix();
     glScalef(0.75, 1, 1);
     glRotatef(90, 0, 1, 0);
-    draw_cylinder(1, 1, 50, 50, 50);
+    draw_cylinder(1, 1, 0, 0, 0);
     glPopMatrix();
 }
 
@@ -172,7 +175,7 @@ void baseStand() {
     glTranslatef(-3, 0, 0);
     glScalef(6, 0.125, 0.125);
     glRotatef(90, 0, 1, 0);
-    draw_cylinder(1, 1, 100, 100, 100);
+    draw_cylinder(1, 1, 0, 0, 0);
     glPopMatrix();
 
 
@@ -235,6 +238,13 @@ void gunStructure() {
 
 //whole gun
 void arteryGun(){
+   //ammo create
+    glPushMatrix();
+    glTranslatef(5, 0, -2);
+    artilleryAmmoCrate();
+    glPopMatrix();
+    
+    
     glPushMatrix();
     glTranslatef(0, 1.75, 0);
     glRotatef(-40, 1, 0, 0);

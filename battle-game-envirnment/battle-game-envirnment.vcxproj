@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="arterygun.cpp" />
+    <ClCompile Include="arteryshells.cpp" />
     <ClCompile Include="axis.cpp" />
     <ClCompile Include="components.cpp" />
     <ClCompile Include="main.cpp" />

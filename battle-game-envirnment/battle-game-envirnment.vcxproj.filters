@@ -36,6 +36,9 @@
     <ClCompile Include="components.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="arteryshells.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
