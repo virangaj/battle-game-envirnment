@@ -40,7 +40,7 @@ void display() {
 
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
-    gluLookAt(5.0 + camX, 5.0 + camY, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(5.0 + camX, 5.0 + camY, 5.0+ camZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
     /* set material parameters */
     const GLfloat blue[4] = { 0.3, 0.3, 1.0, 1.0 };
     glMaterialfv(GL_FRONT, GL_DIFFUSE, blue);
@@ -71,12 +71,15 @@ void display() {
 
 
     glTranslatef(sceX, sceY, sceZ);
-    // glRotatef(sRy, 0, 1, 0);
+   
+    glRotatef(sRy, 0, 1, 0);
      //house
 
     glPushMatrix();
+    
+    //watch tower
     //watchTower();
-    drawGrid();
+   
 
 
 
@@ -87,15 +90,12 @@ void display() {
     // groupPlanes();
     glPopMatrix();
 
+    //soilPillow();
     terrain();
     ground();
 
-    //artilleryShell();
-    //artilleryAmmoCrate();
-    glPushMatrix();
     arteryGun();
-    glPopMatrix();
-    
+    drawGrid();
     drawAxis();
     glPopMatrix();
 
@@ -127,69 +127,74 @@ void specialKeys(int key, int x, int y) {
 
 void keyPress(unsigned char key, int x, int y) {
 
-    switch (key)
-    {
-    case 'q':
-        camX = 0;
-        camY = 0;
-        camZ = 0;
-        sceX = 0;
-        sceY = 0;
-        sceZ = 0;
-        sX = 0;
-        sY = 0;
-        sZ = 0;
-        sRy = 0;
-        sRx = 0;
-        sRz = 0;
+    switch (key){
+        case 'r':
+            camX = 0;
+            camY = 0;
+            camZ = 0;
+            sceX = 0;
+            sceY = 0;
+            sceZ = 0;
+            sX = 0;
+            sY = 0;
+            sZ = 0;
+            sRy = 0;
+            sRx = 0;
+            sRz = 0;
+            break;
 
-        break;
-    case 'r':
-        sRy -= 1;
-        break;
-    case 'l':
-        sRy += 1;
-        break;
-    case 'w':
-        sceZ += steps;
-        break;
-    case 's':
-        sceZ -= steps;
-        break;
-    case 'd':
-        sceX -= steps;
-        break;
-    case 'a':
-        sceX += steps;
-        break;
-    case 'Z':
-        sceY += steps;
-        break;
-    case 'z':
-        sceY -= steps;
-        break;
-    case '1':
-        glEnable(GL_LIGHT0);
-        break;
-    case '!':
-        glDisable(GL_LIGHT0);
-        break;
-    case '2':
-        glEnable(GL_LIGHT1);
-        break;
-    case '@':
-        glDisable(GL_LIGHT1);
-        break;
-    case '3':
-        glPolygonMode(GL_FRONT, GL_LINE);
-        glPolygonMode(GL_BACK, GL_LINE);
-        break;
-    case '4':
-        glPolygonMode(GL_FRONT, GL_FILL);
-        glPolygonMode(GL_BACK, GL_FILL);
-        break;
-    default:
-        break;
+        case 'q':
+            camZ += 1;
+            break;
+        case 'e':
+            camZ -= 1;
+            break;
+        case 'k':
+            sRy -= 1;
+            break;
+        case 'l':
+            sRy += 1;
+            break;
+        case 'w':
+            sceZ += steps;
+            break;
+        case 's':
+            sceZ -= steps;
+            break;
+        case 'd':
+            sceX -= steps;
+            break;
+        case 'a':
+            sceX += steps;
+            break;
+        case 'Z':
+            sceY += steps;
+            break;
+        case 'z':
+            sceY -= steps;
+            break;
+        case '1':
+            glEnable(GL_LIGHT0);
+            break;
+        case '!':
+            glDisable(GL_LIGHT0);
+            break;
+        case '2':
+            glEnable(GL_LIGHT1);
+            break;
+        case '@':
+            glDisable(GL_LIGHT1);
+            break;
+        case '3':
+            glPolygonMode(GL_FRONT, GL_LINE);
+            glPolygonMode(GL_BACK, GL_LINE);
+            break;
+        case '4':
+            glPolygonMode(GL_FRONT, GL_FILL);
+            glPolygonMode(GL_BACK, GL_FILL);
+            break;
+        default:
+            break;
     }
 
     glutPostRedisplay();

@@ -26,3 +26,7 @@ void arteryGun();
 void artilleryShell();
 void artilleryEmptyShell();
 void artilleryAmmoCrate();
+
+
+//can be found in soilpillow.cpp
+void soilPillow();

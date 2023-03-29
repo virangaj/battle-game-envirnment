@@ -45,17 +45,26 @@ void drawGrid() {
     glBegin(GL_LINES);
     for (GLint i = -x; i < x; i += steps) {
 
-        glVertex3f(-x, 0, i);
-        glVertex3f(x, 0, i);
+        if (i==0) {
+            continue;
+        }
+        else{
+            glVertex3f(-x, 0, i);
+            glVertex3f(x, 0, i);
+        }
     }
     glEnd();
 
 
     glBegin(GL_LINES);
     for (GLint i = -x; i < x; i += steps) {
-
-        glVertex3f(i, 0, x);
-        glVertex3f(i, 0, -x);
+        if (i == 0) {
+            continue;
+        }
+        else{
+            glVertex3f(i, 0, x);
+            glVertex3f(i, 0, -x);
+        }
     }
     glEnd();
     glPopMatrix();
