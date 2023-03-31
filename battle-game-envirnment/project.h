@@ -30,3 +30,11 @@ void artilleryAmmoCrate();
 
 //can be found in soilpillow.cpp
 void soilPillow();
+
+//can be found  in buildings.cpp
+void brokenHouse();
+void woodHouse();
+void largeBuilding();
+
+
+void maketree(float height, float Base, float r, float g, float b);

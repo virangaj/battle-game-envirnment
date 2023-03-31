@@ -12,6 +12,40 @@ void TowerLeg() {
 	glPopMatrix();
 }
 
+
+void cross() {
+
+	//left turn
+	glPushMatrix();
+	glRotatef(-45, 0, 0, 1);
+	glScalef(1,0.5,1);
+	TowerLeg();
+	glPopMatrix();
+
+	//right turn
+	glPushMatrix();
+	glTranslatef(2, 0, 0);
+	glRotatef(45, 0, 0, 1);
+	glScalef(1, 0.5, 1);
+	TowerLeg();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(2, 0, 0);
+	glRotatef(90, 0, 0, 1);
+	glScalef(1, 0.38, 1);
+	TowerLeg();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(2, 2, 0);
+	glRotatef(90, 0, 0, 1);
+	glScalef(1, 0.38, 1);
+	TowerLeg();
+	glPopMatrix();
+
+}
+
 //all tower legs
 void allTowerLegs(){
 	
@@ -38,6 +72,34 @@ void allTowerLegs(){
 	glPushMatrix();
 	glTranslatef(1, 0, -1);
 	TowerLeg();
+	glPopMatrix();
+
+
+	//front cross
+	glPushMatrix();
+	glTranslatef(-1, 1, 1);
+	cross();
+	glPopMatrix();
+
+	//back cross
+	glPushMatrix();
+	glTranslatef(-1, 1, -1);
+	cross();
+	glPopMatrix();
+
+	// leftt cross
+	glPushMatrix();
+	glTranslatef(-1, 1, 1);
+	glRotatef(90, 0, 1, 0);
+	cross();
+	glPopMatrix();
+
+
+	// right cross
+	glPushMatrix();
+	glTranslatef(1, 1, 1);
+	glRotatef(90, 0, 1, 0);
+	cross();
 	glPopMatrix();
 }
 
@@ -130,7 +192,7 @@ void sideFence() {
 		glPushMatrix();
 		glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
 		glTranslatef(0.5*i, 0, 0);
-		glScalef(0.1, 0.5, 0.1);
+		glScalef(0.1, 0.8, 0.1);
 		glutSolidCube(1);
 		glPopMatrix();
 
@@ -154,7 +216,7 @@ void frontHalfFence() {
 		glPushMatrix();
 		glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
 		glTranslatef(0.5 * i, 0, 0);
-		glScalef(0.1, 0.5, 0.1);
+		glScalef(0.1, 0.8, 0.1);
 		glutSolidCube(1);
 		glPopMatrix();
 
@@ -168,33 +230,33 @@ void fence() {
 	
 	//back
 	glPushMatrix();
-	glTranslatef(0, 0, -1.8);
+	glTranslatef(0, 0.2, -1.8);
 	sideFence();
 	glPopMatrix();
 
 	//left
 	glPushMatrix();
 	glRotatef(90, 0, 1, 0);
-	glTranslatef(0, 0, -1.8);
+	glTranslatef(0, 0.2, -1.8);
 	sideFence();
 	glPopMatrix();
 
 	//right
 	glPushMatrix();
 	glRotatef(-90, 0, 1, 0);
-	glTranslatef(0, 0, -1.8);
+	glTranslatef(0, 0.2, -1.8);
 	sideFence();
 	glPopMatrix();
 
 	//front left
 	glPushMatrix();
-	glTranslatef(-1, 0, 1.8);
+	glTranslatef(-1, 0.2, 1.8);
 	frontHalfFence();
 	glPopMatrix();
 
 	//front right
 	glPushMatrix();
-	glTranslatef(1, 0, 1.8);
+	glTranslatef(1, 0.2, 1.8);
 	frontHalfFence();
 	glPopMatrix();
 	

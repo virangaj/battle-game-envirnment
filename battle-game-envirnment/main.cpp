@@ -64,7 +64,7 @@ void display() {
 
     /* set light intensities for light source 2 */
     glLightfv(GL_LIGHT1, GL_DIFFUSE, paleYellow);
-    GLfloat green[] = { 0.0,1.0,0.0,1.0 };
+    GLfloat green[] = { 0.5,0.5,0.5,1.0 };
     glLightfv(GL_LIGHT1, GL_SPECULAR, green);
 
 
@@ -79,22 +79,29 @@ void display() {
     
     //watch tower
     //watchTower();
+    glPushMatrix();
+    glScalef(0.3, 0.3, 0.3);
+    maketree(5.0f, 0.3f, 1.0f, 0.5f, 0.7f);
+    glPopMatrix();
+
+    
    
-
-
-
     glPushMatrix();
     glRotated(aa, 0, 1, 0);
     glTranslatef(-10, 10, -10);
     glRotatef(-30, 0, 0, 1);
-    // groupPlanes();
+    //groupPlanes();
     glPopMatrix();
+    terrain();
+
+
+   // brokenHouse();
 
     //soilPillow();
-    terrain();
+    //terrain();
     ground();
 
-    arteryGun();
+    //arteryGun();
     drawGrid();
     drawAxis();
     glPopMatrix();
@@ -150,10 +157,10 @@ void keyPress(unsigned char key, int x, int y) {
             camZ -= 1;
             break;
         case 'k':
-            sRy -= 1;
+            sRy += 1;
             break;
         case 'l':
-            sRy += 1;
+            sRy -= 1;
             break;
         case 'w':
             sceZ += steps;

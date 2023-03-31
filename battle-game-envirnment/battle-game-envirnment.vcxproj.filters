@@ -42,6 +42,12 @@
     <ClCompile Include="SoilPillow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="buildings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tree.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
