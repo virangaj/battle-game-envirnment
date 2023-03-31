@@ -43,3 +43,29 @@ void cylinderWithCap(float br, float tr, float h, int slices) {
     glVertex3f(br, 0.0, 0);
     glEnd();
 }
+
+
+//creat a half cylinder without caps
+void halfCylinderWithoutCaps(float br, float tr, float h, int slices) {
+
+    glEnable(GL_CLIP_PLANE0);
+    double planeEquation[] = { 0.0, 1.0, 0.0, 0 }; //clip plane equaton
+    glClipPlane(GL_CLIP_PLANE0, planeEquation);
+
+    cylinder(br, tr, h, slices);
+
+    glDisable(GL_CLIP_PLANE0);
+}
+
+
+//creat a half cylinder with caps
+void halfCylinderWithCaps(float br, float tr, float h, int slices) {
+
+    glEnable(GL_CLIP_PLANE0);
+    double planeEquation[] = { 0.0, 1.0, 0.0, 0}; //clip plane equaton
+    glClipPlane(GL_CLIP_PLANE0, planeEquation);
+
+    cylinderWithCap(br, tr, h, slices);
+
+    glDisable(GL_CLIP_PLANE0);
+}

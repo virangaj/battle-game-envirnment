@@ -100,10 +100,11 @@ void display() {
     glPopMatrix();
     terrain();
 
-
+    largeBuilding();
 
     //lamp tower
-    lampTower(frame);
+    //to make bulb always lit insert any number 
+    //lampTower(frame);   
 
     //terrain();
     ground();
@@ -218,7 +219,7 @@ void keyPress(unsigned char key, int x, int y) {
 void timer(int x) {
     frame++;
     glutPostRedisplay();
-    glutTimerFunc(60.0, timer, 1);
+    glutTimerFunc(120.0, timer, 1);
 }
 
 void reshape(GLsizei w, GLsizei h) {

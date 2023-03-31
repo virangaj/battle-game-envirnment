@@ -35,7 +35,7 @@ void soilPillow();
 void brokenHouse();
 void woodHouse();
 void largeBuilding();
-
+void singleWindow();
 //can be found in tree.cpp
 void maketree(float height, float Base, float r, float g, float b);
 
@@ -46,3 +46,5 @@ void lampTower(int i);
 //can be found in components.cpp
 void cylinder(float br, float tr, float h, int slices);
 void cylinderWithCap(float br, float tr, float h, int slices);
+void halfCylinderWithCaps(float br, float tr, float h, int slices);
+void halfCylinderWithoutCaps(float br, float tr, float h, int slices);
