@@ -8,7 +8,7 @@
 
 
 
-void draw_cylinder_side_opne(GLfloat radius,
+void draw_cylinder_side_open(GLfloat radius,
     GLfloat height,
     GLfloat R,
     GLfloat G,
@@ -95,7 +95,7 @@ void artilleryEmptyShell() {
     glPushMatrix();
     glScalef(0.25, 0.25, 0.75);
     glColor3f(1, 0.84, 0);
-    draw_cylinder_side_opne(1, 1, 0.41, 0.34, 0);
+    draw_cylinder_side_open(1, 1, 0.41, 0.34, 0);
     glPopMatrix();
 
 }

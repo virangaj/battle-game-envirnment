@@ -9,7 +9,7 @@
 void conerGlobe() {
 	glPushMatrix();
 	glScalef(0.75, 1.25, 1.25);
-	glutSolidSphere(1, 50, 50);
+	glutSolidSphere(1, 10, 10);
 	glPopMatrix();
 }
 
@@ -30,11 +30,10 @@ void soilPillow() {
 	glPopMatrix();
 
 	glPushMatrix();
-
 	glTranslatef(0, 0, 0);
 	glRotatef(90, 0, 1, 0);
 	glScalef(1, 0.7, 3);
-	glutSolidTorus(1, 1.2, 50, 50);
+	glutSolidTorus(1, 1.2, 10, 10);
 	glPopMatrix();
 
 

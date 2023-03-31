@@ -10,52 +10,6 @@
 
 GLfloat limitX = 5, limitY = 1;
 
-
-// draw cylinder
-void cylinder(GLfloat br, GLfloat tr, GLfloat h) {
-    GLUquadricObj* quadratic;
-    quadratic = gluNewQuadric();
-    gluCylinder(quadratic, br, tr, h, 100, 100);
-
-}
-
-// draw cylinder with caps
-void cylinderWithCap(GLfloat br, GLfloat tr, GLfloat h) {
-    cylinder(br, tr, h);
-    GLfloat x = 0.0;
-    GLfloat y = 0.0;
-    GLfloat angle = 0.0;
-    GLfloat angle_stepsize = 0.1;
-
-    glBegin(GL_POLYGON);
-    angle = 0.0;
-    while (angle < 2 * PI) {
-        x = tr * cos(angle);
-        y = tr * sin(angle);
-        glVertex3f(x, y, h);
-        angle = angle + angle_stepsize;
-    }
-    glVertex3f(tr, 0.0, h);
-
-
-    glBegin(GL_POLYGON);
-    angle = 0.0;
-    while (angle < 2 * PI) {
-        x = br * cos(angle);
-        y = br * sin(angle);
-        glVertex3f(x, y, 0);
-        angle = angle + angle_stepsize;
-    }
-    glVertex3f(br, 0.0, 0);
-
-}
-
-
-
-
-
-
-
 void draw_cylinder(GLfloat radius,
     GLfloat height,
     GLfloat R,
@@ -115,18 +69,18 @@ void mainCylinderBarrel() {
 
     glPushMatrix();
     glColor3f(0.2, 0.2, 0.1);
-    cylinder(0.4, 0.125, 1);
+    cylinder(0.4, 0.125, 1, 50);
     glPopMatrix();
     
     glPushMatrix();
     glColor3f(0.5, 0.2, 0.1);
-    cylinder(0.2, 0.125, 2);
+    cylinder(0.2, 0.125, 2, 50);
     glPopMatrix();
 
 
     glPushMatrix();
     glColor3f(0.2, 0.2, 0.1);
-    cylinder(0.125, 0.125, 3);
+    cylinder(0.125, 0.125, 3, 50);
     glPopMatrix();
 }
 

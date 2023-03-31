@@ -36,5 +36,13 @@ void brokenHouse();
 void woodHouse();
 void largeBuilding();
 
-
+//can be found in tree.cpp
 void maketree(float height, float Base, float r, float g, float b);
+
+//can be found in lampTower.cpp
+void lampTower(int i);
+
+
+//can be found in components.cpp
+void cylinder(float br, float tr, float h, int slices);
+void cylinderWithCap(float br, float tr, float h, int slices);

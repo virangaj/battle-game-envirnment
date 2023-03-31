@@ -18,6 +18,8 @@ GLboolean door_open = false;
 
 GLfloat door_Angle = 0.0;
 
+int frame = 0;
+
 
 void init() {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -25,6 +27,10 @@ void init() {
     glEnable(GL_NORMALIZE);
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_LIGHTING);
+
+    //make transparent
+   
+    
 }
 
 
@@ -81,7 +87,7 @@ void display() {
     //watchTower();
     glPushMatrix();
     glScalef(0.3, 0.3, 0.3);
-    maketree(5.0f, 0.3f, 1.0f, 0.5f, 0.7f);
+    //maketree(5.0f, 0.3f, 1.0f, 0.5f, 0.7f);
     glPopMatrix();
 
     
@@ -95,9 +101,10 @@ void display() {
     terrain();
 
 
-   // brokenHouse();
 
-    //soilPillow();
+    //lamp tower
+    lampTower(frame);
+
     //terrain();
     ground();
 
@@ -209,6 +216,7 @@ void keyPress(unsigned char key, int x, int y) {
 }
 
 void timer(int x) {
+    frame++;
     glutPostRedisplay();
     glutTimerFunc(60.0, timer, 1);
 }
