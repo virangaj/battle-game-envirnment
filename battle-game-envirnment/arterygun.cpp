@@ -230,7 +230,7 @@ void gunBase() {
 
 
 // gun structure
-void gunStructure() {
+void gunStructure(float angle) {
 
     glPushMatrix();
 
@@ -238,6 +238,7 @@ void gunStructure() {
 
     glPushMatrix();
     glTranslatef(0, 0, 0.5);
+    glRotatef(angle, 1, 0, 0);
     mainCylinderBarrel();
     glPopMatrix();
 
@@ -263,7 +264,7 @@ void pillowBarrier() {
 }
 
 //whole gun
-void arteryGun(){
+void arteryGun(float angle){
    //ammo create
     glPushMatrix();
     glTranslatef(5, 0, -2);
@@ -289,11 +290,13 @@ void arteryGun(){
     pillowBarrier();
     glPopMatrix();
 
+
+    //gun strcture
     glPushMatrix();
     glTranslatef(0, 1.75, 0);
     glRotatef(-40, 1, 0, 0);
     glScalef(1.5, 1.5, 1.5);
-    gunStructure();
+    gunStructure(angle);
     glPopMatrix();
 
 

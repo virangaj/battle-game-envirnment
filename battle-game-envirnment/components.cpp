@@ -9,7 +9,7 @@
 void cylinder(float br, float tr, float h, int slices) {
     GLUquadricObj* quadratic;
     quadratic = gluNewQuadric();
-    gluCylinder(quadratic, br, tr, h, slices, slices);
+    gluCylinder(quadratic, br, tr, h, slices, 1);
 
 }
 

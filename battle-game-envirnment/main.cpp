@@ -12,28 +12,146 @@ GLfloat animYRot = 0.0f;
 GLfloat sceX = 0.0;
 GLfloat sceY = 0.0;
 GLfloat sceZ = 0.0;
-GLfloat steps = 0.1f;
+GLfloat steps = 1.0f;
 
-GLboolean door_open = false;
-
-GLfloat door_Angle = 0.0;
+float artellaryBarrelAngle = 0.0;
 
 int frame = 0;
 
 
 void init() {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.58, 0.78, 0.93, 1.0f);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_NORMALIZE);
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_LIGHTING);
 
-    //make transparent
-   
     
 }
 
+
 void createScene() {
+    
+
+    const double t = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
+    double a = t * 90.0;
+    double aa = a;
+
+    //glPushMatrix();
+    //glRotated(aa, 0, 1, 0);
+    //glTranslatef(-10, 10, -10);
+    //glRotatef(-30, 0, 0, 1);
+    //groupPlanes();
+    //glPopMatrix();
+
+    //watch tower
+    //front right tower
+    glPushMatrix();
+    glTranslatef(10, 0, 10);
+    glRotatef(180, 0, 1, 0);
+    watchTower();
+    glPopMatrix();
+
+    //front left tower
+    glPushMatrix();
+    glTranslatef(-10, 0, 10);
+    glRotatef(180, 0, 1, 0);
+    watchTower();
+    glPopMatrix();
+
+    //back left tower
+    glPushMatrix();
+    glTranslatef(-10, 0, -10);
+    watchTower();
+    glPopMatrix();
+
+
+    //back right tower
+    glPushMatrix();
+    glTranslatef(10, 0, -10);
+    watchTower();
+    glPopMatrix();
+
+    glPushMatrix();
+    glRotatef(-90, 0, 1, 0);
+    largeBuilding();
+    glPopMatrix();
+
+
+
+    //place the trees
+    for (float i = -6; i < 8; i+=4) {
+        glPushMatrix();
+        glTranslatef(10, 0, i);
+        glScalef(0.2, 0.2, 0.2);
+        maketree(4.0f, 0.3f, 0.93, 0.7, 0.59);
+        glPopMatrix();
+    }
+
+    //place the lamp towers
+    for (float i = -15; i < 15; i += 5) {
+
+        glPushMatrix();
+        glTranslatef(13, 0, i);
+        if (fmod(i,3) == 0) {
+            lampTower(frame, 1);
+        }
+        else {
+            lampTower(0, 0);
+        }
+        glPopMatrix();
+    }
+   
+    //broken trees dues to plane crash
+    glPushMatrix();
+    glTranslatef(-10, 0, -6);
+    glScalef(0.2, 0.2, 0.2);
+    maketree(4.0f, 0.3f, 0.93, 0.7, 0.59);
+    glPopMatrix();
+
+    //fallen tree 1
+    glPushMatrix();
+    glTranslatef(-10, -0.2, -2);
+    glScalef(0.2, 0.2, 0.2);
+    glRotatef(-60, 1, 0, 0);
+    maketree(4.0f, 0.3f, 0.93, 0.7, 0.59);
+    glPopMatrix();
+
+    //fallen tree 2
+    glPushMatrix();
+    glTranslatef(-10, -0.2, 2);
+    glScalef(0.2, 0.2, 0.2);
+    glRotatef(-60, 0, 0, 1);
+    maketree(4.0f, 0.3f, 0.93, 0.7, 0.59);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-10, 0, 6);
+    glScalef(0.2, 0.2, 0.2);
+    maketree(4.0f, 0.3f, 0.93, 0.7, 0.59);
+    glPopMatrix();
+
+    //place broken plane
+    glPushMatrix();
+    glTranslatef(-8, 0, -2);
+    glRotatef(53, 0, 1, 0);
+    brokenPlane();
+    glPopMatrix();
+
+    //place arteryGun
+    glPushMatrix();
+    glTranslatef(-8, 0, -24);
+    arteryGun(artellaryBarrelAngle);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(8, 0, -24);
+    arteryGun(artellaryBarrelAngle);
+    glPopMatrix();
+
+      
+    ground();
+    glPopMatrix();
 
 }
 
@@ -43,13 +161,11 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    const double t = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
-    double a = t * 90.0;
-    double aa = a;
+  
 
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
-    gluLookAt(10.0 + camX, 5.0 + camY, 5.0+ camZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(10.0 + camX, 10.0 + camY, 10.0+ camZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
     /* set material parameters */
     const GLfloat blue[4] = { 0.3, 0.3, 1.0, 1.0 };
     glMaterialfv(GL_FRONT, GL_DIFFUSE, blue);
@@ -85,39 +201,14 @@ void display() {
      //house
 
     glPushMatrix();
+    createScene();
+
     
-    //watch tower
-    //watchTower();
-
-    //create a tree
-    glPushMatrix();
-    glScalef(0.3, 0.3, 0.3);
-    //maketree(5.0f, 0.3f, 0.93, 0.7, 0.59);
-    glPopMatrix();
-
    
-    glPushMatrix();
-    glRotated(aa, 0, 1, 0);
-    glTranslatef(-10, 10, -10);
-    glRotatef(-30, 0, 0, 1);
-    //groupPlanes();
-    glPopMatrix();
-    terrain();
-
-    largeBuilding();
-
-    //lamp tower
-    //to make bulb always lit insert any number 
-    //lampTower(frame);   
-
-    //terrain();
-    ground();
-
-    //arteryGun();
     drawGrid();
     drawAxis();
     glPopMatrix();
-
+    //ground();
     glutSwapBuffers();
 }
 
@@ -160,6 +251,7 @@ void keyPress(unsigned char key, int x, int y) {
             sRy = 0;
             sRx = 0;
             sRz = 0;
+            artellaryBarrelAngle = 0;
             break;
 
         case 'q':
@@ -192,6 +284,10 @@ void keyPress(unsigned char key, int x, int y) {
         case 'z':
             sceY -= steps;
             break;
+        case 'n':
+            artellaryBarrelAngle += 0.5;
+        case 'N':
+            artellaryBarrelAngle -= 0.5;
         case '1':
             glEnable(GL_LIGHT0);
             break;

@@ -5,7 +5,7 @@
 // single tower leg
 void TowerLeg() {
 	glPushMatrix();
-	glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
+	glColor3f(0.6, 0.38, 0.17);
 	glTranslatef(0, 2.75, 0);
 	glScalef(0.2, 5.5, 0.2);
 	glutSolidCube(1);
@@ -18,7 +18,7 @@ void cross() {
 	//left turn
 	glPushMatrix();
 	glRotatef(-45, 0, 0, 1);
-	glScalef(1,0.5,1);
+	glScalef(1, 0.5, 1);
 	TowerLeg();
 	glPopMatrix();
 
@@ -47,8 +47,8 @@ void cross() {
 }
 
 //all tower legs
-void allTowerLegs(){
-	
+void allTowerLegs() {
+
 	//front left leg
 	glPushMatrix();
 	glTranslatef(-1, 0, 1);
@@ -106,7 +106,7 @@ void allTowerLegs(){
 // single ladder leg
 void ladderLeg() {
 	glPushMatrix();
-	glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
+	glColor3f(0.6, 0.38, 0.17);
 	glTranslatef(0, 2, 0);
 	glScalef(0.1, 4, 0.1);
 	glutSolidCube(1);
@@ -131,10 +131,10 @@ void ladder() {
 
 	//middle bars
 	for (int i = 0; i < 16; i++) {
-		
+
 		glPushMatrix();
-		glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
-		glTranslatef(0, 0.25*i, 0);
+		glColor3f(0.6, 0.38, 0.17);
+		glTranslatef(0, 0.25 * i, 0);
 		glScalef(0.4, 0.1, 0.1);
 		glutSolidCube(1);
 		glPopMatrix();
@@ -146,7 +146,7 @@ void ladder() {
 // floor base
 void towerFloorBase() {
 	glPushMatrix();
-	glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
+	glColor3f(0.6, 0.38, 0.17);
 	glScalef(4, 0.1, 4);
 	glutSolidCube(1);
 	glPopMatrix();
@@ -155,9 +155,9 @@ void towerFloorBase() {
 
 // roof side traingle
 void roofSide() {
-	
+
 	glBegin(GL_POLYGON);
-	glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
+	glColor3f(0.6, 0.38, 0.17);
 	glVertex3f(0, 1, 0);
 	glVertex3f(-2, 0, 2);
 	glVertex3f(2, 0, 2);
@@ -169,7 +169,7 @@ void roof() {
 	for (int i = 0; i < 4; i++) {
 
 		glPushMatrix();
-		glRotatef(90*i, 0, 1, 0);
+		glRotatef(90 * i, 0, 1, 0);
 		roofSide();
 		glPopMatrix();
 
@@ -190,8 +190,8 @@ void sideFence() {
 	for (int i = -3; i < 4; i++) {
 
 		glPushMatrix();
-		glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
-		glTranslatef(0.5*i, 0, 0);
+		glColor3f(0.6, 0.38, 0.17);
+		glTranslatef(0.5 * i, 0, 0);
 		glScalef(0.1, 0.8, 0.1);
 		glutSolidCube(1);
 		glPopMatrix();
@@ -214,7 +214,7 @@ void frontHalfFence() {
 	for (int i = -1.5; i < 1.5; i++) {
 
 		glPushMatrix();
-		glColor4f(1.0f, 0.5f, 0.0f, 0.0f);
+		glColor3f(0.6, 0.38, 0.17);
 		glTranslatef(0.5 * i, 0, 0);
 		glScalef(0.1, 0.8, 0.1);
 		glutSolidCube(1);

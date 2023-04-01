@@ -9,15 +9,13 @@ void ground();
 // can be found in plane.cpp
 void plane();
 void groupPlanes();
+void brokenPlane();
 
 //can be found in watch_Tower.cpp
 void watchTower();
 
-// can be found in the terrain.cpp
-void terrain();
-
 //can be found in arterygun.cpp
-void arteryGun();
+void arteryGun(float angle);
 
 
 
@@ -46,7 +44,7 @@ void maketree(float height, float Base, float r, float g, float b);
 
 
 //can be found in lampTower.cpp
-void lampTower(int i);
+void lampTower(int i, int leaks);
 
 
 //can be found in components.cpp
