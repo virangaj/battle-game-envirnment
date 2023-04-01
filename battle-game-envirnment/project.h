@@ -40,9 +40,6 @@ void singleWindow();
 void maketree(float height, float Base, float r, float g, float b);
 
 
-
-
-
 //can be found in lampTower.cpp
 void lampTower(int i, int leaks);
 
@@ -52,3 +49,7 @@ void cylinder(float br, float tr, float h, int slices);
 void cylinderWithCap(float br, float tr, float h, int slices);
 void halfCylinderWithCaps(float br, float tr, float h, int slices);
 void halfCylinderWithoutCaps(float br, float tr, float h, int slices);
+
+
+//can be found in machineGun.cpp
+void machineGun();

@@ -136,6 +136,7 @@
     <ClCompile Include="buildings.cpp" />
     <ClCompile Include="components.cpp" />
     <ClCompile Include="lightTower.cpp" />
+    <ClCompile Include="machineGun.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="SoilPillow.cpp" />

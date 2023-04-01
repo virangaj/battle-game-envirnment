@@ -69,3 +69,4 @@ void halfCylinderWithCaps(float br, float tr, float h, int slices) {
 
     glDisable(GL_CLIP_PLANE0);
 }
+

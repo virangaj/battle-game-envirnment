@@ -201,14 +201,17 @@ void display() {
      //house
 
     glPushMatrix();
-    createScene();
+    //createScene();
 
-    
+    machineGun();
+    ground();
+
    
     drawGrid();
     drawAxis();
     glPopMatrix();
-    //ground();
+
+
     glutSwapBuffers();
 }
 
