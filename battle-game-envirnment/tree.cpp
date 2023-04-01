@@ -2,19 +2,22 @@
 #include <GL/glut.h> 
 
 
-
-void makecylinder(float height, float Base, float r, float g, float b)
-{
+//make cylinder
+void makecylinder(float height, float Base, float r, float g, float b){
 	GLUquadricObj* qobj;
 	qobj = gluNewQuadric();
 	glColor3f(r, b, b);
 	glPushMatrix();
 	glRotatef(-90, 1.0f, 0.0f, 0.0f);
-	gluCylinder(qobj, Base, Base - (0.2 * Base), height, 20, 20);
+	gluCylinder(qobj, Base, Base - (0.2 * Base), height, 10, 10);
 	glPopMatrix();
 }
-void maketree(float height, float Base, float r, float g, float b)
-{
+
+
+
+
+// make a tree
+void maketree(float height, float Base, float r, float g, float b){
 
 	glPushMatrix();
 	float angle;

@@ -33,6 +33,9 @@ void init() {
     
 }
 
+void createScene() {
+
+}
 
 void display() {
 
@@ -46,7 +49,7 @@ void display() {
 
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
-    gluLookAt(5.0 + camX, 5.0 + camY, 5.0+ camZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(10.0 + camX, 5.0 + camY, 5.0+ camZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
     /* set material parameters */
     const GLfloat blue[4] = { 0.3, 0.3, 1.0, 1.0 };
     glMaterialfv(GL_FRONT, GL_DIFFUSE, blue);
@@ -85,12 +88,13 @@ void display() {
     
     //watch tower
     //watchTower();
+
+    //create a tree
     glPushMatrix();
     glScalef(0.3, 0.3, 0.3);
-    //maketree(5.0f, 0.3f, 1.0f, 0.5f, 0.7f);
+    //maketree(5.0f, 0.3f, 0.93, 0.7, 0.59);
     glPopMatrix();
 
-    
    
     glPushMatrix();
     glRotated(aa, 0, 1, 0);

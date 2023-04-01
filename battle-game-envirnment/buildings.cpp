@@ -32,8 +32,8 @@ void halfCylinderArea() {
 //create payment
 void payment() {
     glPushMatrix();
-    glColor3f(0.31, 0.17, 0.04);
-    glScalef(length, 0.2, 1);
+    glColor3f(0.17, 0.17, 0.2);
+    glScalef(length + 2, 0.2, 2*length/5+ 2);
     glutSolidCube(1);
     glPopMatrix();
 }
@@ -131,8 +131,8 @@ void leftSideBuilding() {
     //second floar top wall
     glPushMatrix();
     glColor3f(0.6, 0.38, 0.17);
-    glTranslatef(0, 4.125, 0);
-    glScalef(length, 0.25, windowBorderWidth);
+    glTranslatef(0, 4.5, 0);
+    glScalef(length, 1, windowBorderWidth);
     glutSolidCube(1);
     glPopMatrix();
 
@@ -169,12 +169,7 @@ void leftSideBuilding() {
     glutSolidCube(1);
     glPopMatrix();
 
-    //start of second floor
-    glPushMatrix();
-    glTranslatef(0, 3, 0);
-    payment();
-    glPopMatrix();
-
+   
 
     //create second layer with half cylinders
     glPushMatrix();
@@ -190,41 +185,201 @@ void leftSideBuilding() {
     glutSolidCube(1);
     glPopMatrix();
 
-    //create bottom payment
-    payment();
+   
 
 }
 
 
 
+//create one grill
+void oneGrill(float h, float placeH) {
 
+    glPushMatrix();
+    glTranslatef(0, placeH, 0);
+    glColor3f(0, 0, 0);
+    glScalef(0.05, h, 0.05);
+    glutSolidCube(1);
+    glPopMatrix();
+}
+
+//create a door grill
+void buildingDoorGrillSection() {
+
+    //cross bar
+    glPushMatrix();
+    glTranslatef(0, -0.75, 0);
+    glColor3f(0, 0, 0);
+    glScalef(0.05, 0.05, length / 5);
+    glutSolidCube(1);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(0, 2.5, 0);
+    glColor3f(0, 0, 0);
+    glScalef(0.05, 0.05, length / 5);
+    glutSolidCube(1);
+    glPopMatrix();
+
+    //cross bar
+    glPushMatrix();
+    glTranslatef(0, -0.5, 0);
+    glColor3f(0, 0, 0);
+    glScalef(0.05, 0.05, length / 5);
+    glutSolidCube(1);
+    glPopMatrix();
+
+
+    for (float i = -length / 5; i < length / 5; i+=0.25) {
+        
+        glPushMatrix();
+        glTranslatef(0, 0, i);
+        oneGrill(length / 4, 0);
+        glPopMatrix();
+    }
+
+}
+
+
+//create fornt face
+void frontFace() {
+
+    //door grill section
+    buildingDoorGrillSection();
+
+
+
+    //above the door
+    glPushMatrix();
+    glTranslatef(0, 1, 0);
+    glColor3f(0.6, 0.38, 0.17);
+    glScalef(0.4, 2, 4);
+    glutSolidCube(1);
+    glPopMatrix();
+
+    
+    //one side
+    glPushMatrix();
+    glTranslatef(0, 0, 3);
+    glColor3f(0.6, 0.38, 0.17);
+    glScalef(length / 50, length / 4, length / 10);
+    glutSolidCube(1);
+    glPopMatrix();
+
+    //one side
+    glPushMatrix();
+    glTranslatef(0, 0, -3);
+    glColor3f(0.6, 0.38, 0.17);
+    glScalef(length / 50, length / 4, length / 10);
+    glutSolidCube(1);
+    glPopMatrix();
+
+}
+
+
+//create roof plane
+void largeBuildingRoofPlane() {
+
+    glPushMatrix();
+    glRotatef(5, 1, 0, 0);
+    for (float i = 0; i < 0.4; i += 0.05) {
+     
+        glPushMatrix();
+        glColor3f(0.27, 0.2, 0.16);
+        glTranslatef(0, i, -(10*i));
+        glScalef(length + 2, 0.05, length / 20);
+        glutSolidCube(1);
+        glPopMatrix();
+        
+    }
+
+    glPopMatrix();
+
+
+    
+
+}
+
+
+//create building roof
+void largeBuildingRoof() {
+
+
+
+    //middle bar
+    glPushMatrix();
+    glColor3f(0.27, 0.2, 0.16);
+    glTranslatef(0, 0.7, 0);
+    glScalef(length + 2, 0.05, length / 20);
+    glutSolidCube(1);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(0, 0, length / 5);
+    //back roof
+    glPushMatrix();
+    glTranslatef(0, 0, -2*length/5);
+    glRotatef(180, 0, 1, 0);
+    largeBuildingRoofPlane();
+    glPopMatrix();
+
+    //front roof
+    glPushMatrix();
+    largeBuildingRoofPlane();
+    glPopMatrix();
+    glPopMatrix();
+}
 
 void largeBuilding() {
 
     glPushMatrix();
-    glRotatef(-90, 0, 1, 0);
+    //glRotatef(-90, 0, 1, 0);
 
 
     //front
     glPushMatrix();
-    glTranslatef(0, 0, 4);
+    glTranslatef(0, 0, length/5);
     leftSideBuilding();
     glPopMatrix();
     
     //back
     glPushMatrix();
-    glTranslatef(0, 0, -4);
+    glTranslatef(0, 0, -length / 5);
     leftSideBuilding();
     glPopMatrix();
 
     //left side
     glPushMatrix();
-    glTranslatef(-length/2, 0, 0);
+    glTranslatef(-length/2, length / 8, 0);
     glColor3f(0.6, 0.38, 0.17);
-    glScalef(0.4, 8.5, 8);
+    glScalef(length / 50, length / 4, 2 * length / 5);
     glutSolidCube(1);
     glPopMatrix();
 
+
+    //front face
+    glPushMatrix();
+    glTranslatef(length / 2, length / 8, 0);
+    frontFace();
+    glPopMatrix();
+
+ 
+    //start of second floor
+    glPushMatrix();
+    glTranslatef(0, 3, 0);
+    payment();
+    glPopMatrix();
+
+    //create bottom payment
+    glPushMatrix();
+    payment();
+    glPopMatrix();
+
+    //create roof
+    glPushMatrix();
+    glTranslatef(0, 5, 0);
+    largeBuildingRoof();
+    glPopMatrix();
 
     glPopMatrix();
 }
