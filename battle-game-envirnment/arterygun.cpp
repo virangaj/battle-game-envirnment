@@ -304,3 +304,52 @@ void arteryGun(float angle){
     gunBase();
     glPopMatrix();
 }
+
+//create mini barrier
+void miniPillowBarreir(int n) {
+
+    for (GLfloat i = -n; i < n; i += 1.25) {
+        for (GLfloat j = 0; j < 0.5; j += 0.25) {
+
+            glPushMatrix();
+            glTranslatef(i, j, 0);
+            glScalef(0.2, 0.2, 0.2);
+            soilPillow();
+            glPopMatrix();
+        }
+    }
+
+}
+
+//create sensary gun ground base
+void groundMiniGunBase(float angle) {
+
+    //mini gun
+    glPushMatrix();
+    glScalef(0.25, 0.25, 0.25);
+    machineGun(angle);
+    glPopMatrix();
+    
+
+    //front barrier
+    glPushMatrix();
+    glTranslatef(0, 0, 1);
+    miniPillowBarreir(2);
+    glPopMatrix();
+
+    //left barrier
+    glPushMatrix();
+    glTranslatef(-2, 0, -0.5);
+    glRotatef(90, 0, 1, 0);
+    miniPillowBarreir(1);
+    glPopMatrix();
+
+
+    //right barrier
+    glPushMatrix();
+    glTranslatef(2, 0, -0.5);
+    glRotatef(90, 0, 1, 0);
+    miniPillowBarreir(1);
+    glPopMatrix();
+
+}

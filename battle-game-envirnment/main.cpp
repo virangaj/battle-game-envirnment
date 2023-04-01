@@ -2,6 +2,7 @@
 #include "project.h"
 #include <math.h>
 
+
 #define PI 3.1415927
 
 GLfloat camX, camY, camZ = 0.0f;
@@ -15,7 +16,7 @@ GLfloat sceZ = 0.0;
 GLfloat steps = 1.0f;
 
 float artellaryBarrelAngle = 0.0;
-
+float minigunRot = 0.0f;
 int frame = 0;
 
 
@@ -49,27 +50,27 @@ void createScene() {
     glPushMatrix();
     glTranslatef(10, 0, 10);
     glRotatef(180, 0, 1, 0);
-    watchTower();
+    watchTower(frame + 20);
     glPopMatrix();
 
     //front left tower
     glPushMatrix();
     glTranslatef(-10, 0, 10);
     glRotatef(180, 0, 1, 0);
-    watchTower();
+    watchTower(-1 * (frame + 60));
     glPopMatrix();
 
     //back left tower
     glPushMatrix();
     glTranslatef(-10, 0, -10);
-    watchTower();
+    watchTower(frame + 90);
     glPopMatrix();
 
 
     //back right tower
     glPushMatrix();
     glTranslatef(10, 0, -10);
-    watchTower();
+    watchTower(-1 * (frame + 180));
     glPopMatrix();
 
     glPushMatrix();
@@ -150,6 +151,38 @@ void createScene() {
     glPopMatrix();
 
       
+    glPushMatrix();
+    glTranslatef(-3, 0, 18);
+    glScalef(0.5, 0.5, 0.5);
+    groundMiniGunBase(frame);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(3, 0, 18);
+    glScalef(0.5, 0.5, 0.5);
+    groundMiniGunBase(-frame+90);
+    glPopMatrix();
+
+
+   
+
+    //place container boxes
+    for (float i = -10; i < 10; i+=6) {
+
+        for (float j = 0; j <4; j += 2) {
+            glPushMatrix();
+            glTranslatef(20, j, i);
+            containerBox(0, 0, 0.1, 0.24);
+            glPopMatrix();
+
+            glPushMatrix();
+            glTranslatef(22, j, i);
+            containerBox(0, 0.24, 0, 0);
+            glPopMatrix();
+        }
+    }
+
+
     ground();
     glPopMatrix();
 
@@ -201,9 +234,9 @@ void display() {
      //house
 
     glPushMatrix();
-    //createScene();
+    createScene();
 
-    machineGun();
+    //drawFenceRow(3);
     ground();
 
    
@@ -321,6 +354,9 @@ void keyPress(unsigned char key, int x, int y) {
 
 void timer(int x) {
     frame++;
+
+ 
+   
     glutPostRedisplay();
     glutTimerFunc(120.0, timer, 1);
 }

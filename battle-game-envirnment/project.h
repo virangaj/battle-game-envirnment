@@ -12,11 +12,11 @@ void groupPlanes();
 void brokenPlane();
 
 //can be found in watch_Tower.cpp
-void watchTower();
+void watchTower(float angle);
 
 //can be found in arterygun.cpp
 void arteryGun(float angle);
-
+void groundMiniGunBase(float angle);
 
 
 
@@ -52,4 +52,11 @@ void halfCylinderWithoutCaps(float br, float tr, float h, int slices);
 
 
 //can be found in machineGun.cpp
-void machineGun();
+void machineGun(float angle);
+
+//can be found in fence.cpp
+void drawFenceRow(int number);
+
+
+//can be found in boxes.cpp
+void containerBox(int open, float r, float g, float b);

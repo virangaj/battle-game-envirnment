@@ -130,7 +130,7 @@ void lampTowerBase() {
 	glPushMatrix();
 	glRotatef(-90, 1, 0, 0);
 	glColor3f(0.25, 0.25, 0.25);
-	cylinderWithCap(1, 0.5, 0.25, 5);
+	cylinderWithCap(1, 0.5, 0.25, 10);
 	glPopMatrix();
 }
 
@@ -146,4 +146,5 @@ void lampTower(int i, int leaks) {
 	glPopMatrix();
 
 	lampTowerBase();
+
 }

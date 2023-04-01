@@ -7,6 +7,15 @@
 
 
 float d = 0.5;
+void laser() {
+	glBegin(GL_LINES);
+	glLineWidth(2);
+	glColor3f(1, 0, 0);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, 0, 100);
+	glEnd();
+}
+
 
 void machineGunBarrel() {
 	float angle = 0.0;
@@ -23,6 +32,7 @@ void machineGunBarrel() {
 		glPopMatrix();
 		angle = angle + PI/3;
 	}
+	laser();
 
 	//round large baller holder
 	glPushMatrix();
@@ -154,9 +164,13 @@ void miniGun() {
 }
 
 
-void machineGun() {
+
+void machineGun(float angle) {
 	glPushMatrix();
 	glTranslatef(0, 2.5, 0.2);
+	glRotatef(angle, 0, 1, 0);
+	glRotatef(5, 1, 0, 0);
+	glScalef(1, 1, 1.5);
 	miniGun();
 	glPopMatrix();
 

@@ -12,7 +12,7 @@ void TowerLeg() {
 	glPopMatrix();
 }
 
-
+// cross
 void cross() {
 
 	//left turn
@@ -181,7 +181,7 @@ void sideFence() {
 
 	//fence top bar
 	glPushMatrix();
-	glColor4f(1.0f, 0, 0, 1);
+	glColor4f(0.1, 0.02, 0.04, 1);
 	glScalef(4, 0.1, 0.1);
 	glutSolidCube(1);
 	glPopMatrix();
@@ -205,7 +205,7 @@ void frontHalfFence() {
 
 	//fence top bar
 	glPushMatrix();
-	glColor4f(1.0f, 0, 0, 1);
+	glColor4f(0.1, 0.02, 0.04, 1);
 	glScalef(1.4, 0.1, 0.1);
 	glutSolidCube(1);
 	glPopMatrix();
@@ -263,10 +263,16 @@ void fence() {
 
 }
 
-void watchTower() {
+void watchTower(float angle) {
 	//floor base
 	glPushMatrix();
 	glTranslatef(0, 4, 0);
+	glPushMatrix();
+	glTranslatef(0, 0, -0.5);
+	glScalef(0.25, 0.25, 0.25);
+	glRotatef(180, 0, 1, 0);
+	machineGun(angle);
+	glPopMatrix();
 	towerFloorBase();
 	glPopMatrix();
 

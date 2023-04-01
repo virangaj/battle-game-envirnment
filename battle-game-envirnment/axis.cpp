@@ -75,7 +75,7 @@ void drawGrid() {
 void groundPlane() {
     glPushMatrix();
     //glColor3f(0.26, 0.07, 0);
-    glColor3f(1, 1, 1);
+    glColor3f(0.22, 0.15, 0.01);
     glBegin(GL_POLYGON);
     glVertex3f(-x, -0.1, -x);
     glVertex3f(x, -0.1, -x);

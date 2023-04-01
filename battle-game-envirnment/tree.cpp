@@ -9,7 +9,7 @@ void makecylinder(float height, float Base, float r, float g, float b){
 	glColor3f(r, b, b);
 	glPushMatrix();
 	glRotatef(-90, 1.0f, 0.0f, 0.0f);
-	gluCylinder(qobj, Base, Base - (0.2 * Base), height, 10, 10);
+	gluCylinder(qobj, Base, Base - (0.2 * Base), height, 10, 1);
 	glPopMatrix();
 }
 

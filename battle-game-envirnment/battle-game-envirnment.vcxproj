@@ -133,8 +133,10 @@
     <ClCompile Include="arterygun.cpp" />
     <ClCompile Include="arteryshells.cpp" />
     <ClCompile Include="axis.cpp" />
+    <ClCompile Include="boxes.cpp" />
     <ClCompile Include="buildings.cpp" />
     <ClCompile Include="components.cpp" />
+    <ClCompile Include="fence.cpp" />
     <ClCompile Include="lightTower.cpp" />
     <ClCompile Include="machineGun.cpp" />
     <ClCompile Include="main.cpp" />
