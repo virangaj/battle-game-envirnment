@@ -130,10 +130,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="armorTank.cpp" />
+    <ClCompile Include="arterygun.cpp" />
+    <ClCompile Include="arteryshells.cpp" />
     <ClCompile Include="axis.cpp" />
+    <ClCompile Include="boxes.cpp" />
+    <ClCompile Include="buildings.cpp" />
+    <ClCompile Include="components.cpp" />
+    <ClCompile Include="fence.cpp" />
+    <ClCompile Include="helicopter.cpp" />
+    <ClCompile Include="lightTower.cpp" />
+    <ClCompile Include="machineGun.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="plane.cpp" />
-    <ClCompile Include="watch_tower.cpp" />
+    <ClCompile Include="radarSet.cpp" />
+    <ClCompile Include="SoilPillow.cpp" />
+    <ClCompile Include="tree.cpp" />
+    <ClCompile Include="watchtower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project.h" />
