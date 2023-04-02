@@ -16,7 +16,7 @@ GLfloat sceZ = 0.0;
 GLfloat steps = 1.0f;
 
 float artellaryBarrelAngle = 0.0;
-float minigunRot = 0.0f;
+float minigunRot = 0.0f, minigunRothelper = 0.0f;
 int frame = 0;
 
 
@@ -28,6 +28,35 @@ void init() {
     glEnable(GL_LIGHTING);
 
     
+}
+void placeLightning() {
+    /* set material parameters */
+    const GLfloat blue[4] = { 0.3, 0.3, 1.0, 1.0 };
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, blue);
+    const GLfloat matwhite[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glMaterialfv(GL_FRONT, GL_SPECULAR, matwhite);
+    glMaterialf(GL_FRONT, GL_SHININESS, 128.0f);
+
+    /* positioned the light source 1 */
+    GLfloat position0[] = { 20.0,20.0,20.0,1.0 };
+    glLightfv(GL_LIGHT0, GL_POSITION, position0);
+
+    /* set light intensities for light source 1 */
+    GLfloat paleYellow[] = { 1.0,1.0,0.75,1.0 };
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, paleYellow);
+    GLfloat white[] = { 1.0,1.0,1.0,1.0 };
+    glLightfv(GL_LIGHT0, GL_SPECULAR, white);
+    glEnable(GL_LIGHT0);
+
+    /* positioned the light source 2 */
+    GLfloat position1[] = { -20.0,20.0,-20.0,1.0 };
+    glLightfv(GL_LIGHT1, GL_POSITION, position1);
+
+    /* set light intensities for light source 2 */
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, paleYellow);
+    //GLfloat white[] = { 1.0,1.0,1.0,1.0 };
+    glLightfv(GL_LIGHT1, GL_SPECULAR, white);
+    glEnable(GL_LIGHT1);
 }
 
 
@@ -50,27 +79,27 @@ void createScene() {
     glPushMatrix();
     glTranslatef(10, 0, 10);
     glRotatef(180, 0, 1, 0);
-    watchTower(frame + 20);
+    watchTower(minigunRot + 20);
     glPopMatrix();
 
     //front left tower
     glPushMatrix();
     glTranslatef(-10, 0, 10);
     glRotatef(180, 0, 1, 0);
-    watchTower(-1 * (frame + 60));
+    watchTower(minigunRot);
     glPopMatrix();
 
     //back left tower
     glPushMatrix();
     glTranslatef(-10, 0, -10);
-    watchTower(frame + 90);
+    watchTower(minigunRot);
     glPopMatrix();
 
 
     //back right tower
     glPushMatrix();
     glTranslatef(10, 0, -10);
-    watchTower(-1 * (frame + 180));
+    watchTower(minigunRot);
     glPopMatrix();
 
     glPushMatrix();
@@ -154,34 +183,46 @@ void createScene() {
     glPushMatrix();
     glTranslatef(-3, 0, 18);
     glScalef(0.5, 0.5, 0.5);
-    groundMiniGunBase(frame);
+    groundMiniGunBase(minigunRot);
     glPopMatrix();
 
     glPushMatrix();
     glTranslatef(3, 0, 18);
     glScalef(0.5, 0.5, 0.5);
-    groundMiniGunBase(-frame+90);
+    groundMiniGunBase(minigunRot - 180);
     glPopMatrix();
-
-
-   
 
     //place container boxes
     for (float i = -10; i < 10; i+=6) {
 
         for (float j = 0; j <4; j += 2) {
             glPushMatrix();
-            glTranslatef(20, j, i);
+            glTranslatef(-20, j, i);
             containerBox(0, 0, 0.1, 0.24);
             glPopMatrix();
 
             glPushMatrix();
-            glTranslatef(22, j, i);
+            glTranslatef(-22, j, i);
             containerBox(0, 0.24, 0, 0);
             glPopMatrix();
         }
     }
 
+    //place radars
+    glPushMatrix();
+    glTranslatef(22, 0, 10);
+    glScalef(0.6, 0.6, 0.6);
+    radarMachine(frame);
+    glPopMatrix();
+   
+    //place helicopter 
+    glPushMatrix();
+    glTranslatef(22, 0, -10);
+    glScalef(0.8, 0.8, 0.8);
+    helicopter(frame*20);
+    glPopMatrix();
+
+    glPopMatrix();
 
     ground();
     glPopMatrix();
@@ -195,38 +236,14 @@ void display() {
     glLoadIdentity();
 
   
-
-    glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
-    gluLookAt(10.0 + camX, 10.0 + camY, 10.0+ camZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-    /* set material parameters */
-    const GLfloat blue[4] = { 0.3, 0.3, 1.0, 1.0 };
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, blue);
-    const GLfloat matwhite[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    glMaterialfv(GL_FRONT, GL_SPECULAR, matwhite);
-    glMaterialf(GL_FRONT, GL_SHININESS, 128.0f);
-
-    /* positioned the light source 1 */
-    GLfloat position0[] = { 10.0,10.0,10.0,1.0 };
-    glLightfv(GL_LIGHT0, GL_POSITION, position0);
-
-    /* set light intensities for light source 1 */
-    GLfloat paleYellow[] = { 1.0,1.0,0.75,1.0 };
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, paleYellow);
-    GLfloat white[] = { 1.0,1.0,1.0,1.0 };
-    glLightfv(GL_LIGHT0, GL_SPECULAR, white);
-
-    /* positioned the light source 2 */
-    GLfloat position1[] = { -10.0,10.0,-10.0,1.0 };
-    glLightfv(GL_LIGHT1, GL_POSITION, position1);
-
-    /* set light intensities for light source 2 */
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, paleYellow);
-    GLfloat green[] = { 0.5,0.5,0.5,1.0 };
-    glLightfv(GL_LIGHT1, GL_SPECULAR, green);
+    //place camera
+    gluLookAt(10.0 + camX, 10.0 + camY, 20.0+ camZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    
+    //add ligts
+    placeLightning();
 
 
-
+    glPushMatrix();
 
     glTranslatef(sceX, sceY, sceZ);
    
@@ -236,15 +253,17 @@ void display() {
     glPushMatrix();
     createScene();
 
-    //drawFenceRow(3);
-    ground();
+    //helicopter(frame * 20);
 
    
-    drawGrid();
-    drawAxis();
+    //ground();
+
+   
+    //drawGrid();
+    //drawAxis();
     glPopMatrix();
 
-
+    glPopMatrix();
     glutSwapBuffers();
 }
 
@@ -354,6 +373,19 @@ void keyPress(unsigned char key, int x, int y) {
 
 void timer(int x) {
     frame++;
+    minigunRothelper++;
+
+    if (minigunRothelper < 90) {
+        minigunRot+=2;
+    }
+    else {
+        minigunRot = minigunRot - 2;
+    }
+
+    if (minigunRothelper == 180) {
+        minigunRothelper = 0;
+    }
+
 
  
    
@@ -379,7 +411,7 @@ int main(int argc, char** argv) {
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGBA);
-    glutInitWindowSize(500, 500);
+    glutInitWindowSize(1200, 1000);
     glutInitWindowPosition(150, 150);
     glutCreateWindow("Gaming Envirnment");
     glutDisplayFunc(display);

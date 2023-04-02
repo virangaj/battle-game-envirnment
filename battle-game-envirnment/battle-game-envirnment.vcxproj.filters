@@ -57,6 +57,12 @@
     <ClCompile Include="boxes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="radarSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helicopter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
