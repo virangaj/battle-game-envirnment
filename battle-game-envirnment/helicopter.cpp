@@ -263,6 +263,34 @@ void heliStand() {
 
 }
 
+//mount machinve guns
+void mountMiniGun() {
+
+	// mini gun mount handle
+	glPushMatrix();
+	glTranslatef(-0.2, 0, 0);
+	glScalef(0.1, 0.1, 3);
+	glutSolidCube(1);
+	glPopMatrix();
+
+	//right gun
+	glPushMatrix();
+	glTranslatef(0, 0, 1.5);
+	glRotatef(90, 0, 1, 0);
+	glScalef(0.2, 0.2, 0.4);
+	miniGun(0);
+	glPopMatrix();
+
+
+	//left gun
+	glPushMatrix();
+	glTranslatef(0, 0, -1.5);
+	glRotatef(90, 0, 1, 0);
+	glScalef(0.2, 0.2, 0.4);
+	miniGun(0);
+	glPopMatrix();
+}
+
 //assemble helicopter
 void assembleHelicopter(float angle) {
 	//heli body
@@ -270,6 +298,15 @@ void assembleHelicopter(float angle) {
 	glScalef(1, 0.5, 0.5);
 	clippedHeliBody();
 	glPopMatrix();
+
+	//machine guns
+	glPushMatrix();
+	glTranslatef(3, 0.2, 0);
+	mountMiniGun();
+	glPopMatrix();
+
+
+
 
 	//bck
 	backSecction(angle);

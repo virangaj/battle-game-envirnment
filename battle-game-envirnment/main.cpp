@@ -18,9 +18,11 @@ GLfloat steps = 1.0f;
 float heliRotX = 0, heliRotY = 0, heliRotZ = 0, helimoveX = 0, helimoveY = 0, helimoveZ = 0, helpHeli = 0;
 
 
+float tankWheel = 0, tankTurrent = 0, tankMove = 15;
+
 
 float artellaryBarrelAngle = 0.0;
-float minigunRot = 0.0f, minigunRothelper = 0.0f;
+float minigunRot = 0.0f, minigunRotHelper = 0.0f;
 int frame = 0;
 
 
@@ -41,6 +43,7 @@ void placeLightning() {
     glMaterialfv(GL_FRONT, GL_SPECULAR, matwhite);
     glMaterialf(GL_FRONT, GL_SHININESS, 128.0f);
 
+    //glEnable(GL_LIGHT0);
     /* positioned the light source 1 */
     GLfloat position0[] = { 20.0,20.0,20.0,1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, position0);
@@ -50,8 +53,8 @@ void placeLightning() {
     glLightfv(GL_LIGHT0, GL_DIFFUSE, paleYellow);
     GLfloat white[] = { 1.0,1.0,1.0,1.0 };
     glLightfv(GL_LIGHT0, GL_SPECULAR, white);
-    glEnable(GL_LIGHT0);
-
+    
+    //glEnable(GL_LIGHT1);
     /* positioned the light source 2 */
     GLfloat position1[] = { -20.0,20.0,-20.0,1.0 };
     glLightfv(GL_LIGHT1, GL_POSITION, position1);
@@ -60,12 +63,12 @@ void placeLightning() {
     glLightfv(GL_LIGHT1, GL_DIFFUSE, paleYellow);
     //GLfloat white[] = { 1.0,1.0,1.0,1.0 };
     glLightfv(GL_LIGHT1, GL_SPECULAR, white);
-    glEnable(GL_LIGHT1);
+    
 }
 
 
 //helicopter animation function
-void helicopterAnimation() {
+void helicopterTakeOffAnimation() {
     glPushMatrix();
     glTranslatef(22, 0, -10);
 
@@ -224,12 +227,12 @@ void createScene() {
 
         for (float j = 0; j <4; j += 2) {
             glPushMatrix();
-            glTranslatef(-20, j, i);
+            glTranslatef(-22, j, i);
             containerBox(0, 0, 0.1, 0.24);
             glPopMatrix();
 
             glPushMatrix();
-            glTranslatef(-22, j, i);
+            glTranslatef(-24, j, i);
             containerBox(0, 0.24, 0, 0);
             glPopMatrix();
         }
@@ -246,11 +249,11 @@ void createScene() {
     glPushMatrix();
     glTranslatef(22, 0, 5);
     glScalef(0.6, 0.6, 0.6);
-    radarMachine(frame);
+    radarMachine(frame*20);
     glPopMatrix();
 
     //place helicopter 
-    helicopterAnimation();
+    helicopterTakeOffAnimation();
    
 
     //place helicopter pad
@@ -259,6 +262,20 @@ void createScene() {
     helipad();
     glPopMatrix();
 
+    //place tank
+    glPushMatrix();
+    glTranslatef(tankMove, 0, 15);
+    glScalef(0.6, 0.6, 0.6);
+    armorTank(frame, minigunRot);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(-16, 0, -tankMove);
+    glRotatef(90, 0, 1, 0);
+    glScalef(0.6, 0.6, 0.6);
+    armorTank(frame, minigunRot);
+    glPopMatrix();
 
     //place gound
     glPushMatrix();
@@ -272,9 +289,11 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+    float basePosition = 20;
   
     //place camera
-    gluLookAt(10.0 + camX, 10.0 + camY, 20.0+ camZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    gluLookAt(basePosition + camX, basePosition + camY, basePosition + camZ, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    
     
     //add ligts
     placeLightning();
@@ -287,16 +306,12 @@ void display() {
     glRotatef(sRy, 0, 1, 0);
 
     glPushMatrix();
-    //createScene();
-
-    /*helicopter(frame * 20);
-    helipad();*/
+    createScene();
+  
    
-    largeBuilding();
-    //ground();
 
-    drawGrid();
-    drawAxis();
+    /*drawGrid();
+    drawAxis();*/
     glPopMatrix();
 
     glPopMatrix();
@@ -343,6 +358,7 @@ void keyPress(unsigned char key, int x, int y) {
             sRx = 0;
             sRz = 0;
             artellaryBarrelAngle = 0;
+            minigunRotHelper = 0;
             break;
 
         case 'q':
@@ -409,21 +425,51 @@ void keyPress(unsigned char key, int x, int y) {
 
 void timer(int x) {
     frame++;
-    minigunRothelper++;
+    minigunRotHelper++;
     helpHeli++;
 
+    tankMove -= 0.02;
 
     //helicopter movement
+    //heli up
     if (helpHeli < 135) {
         heliRotY++;
         helimoveY = helimoveY + 0.08;
     }
+    //z bend towards
     if (helpHeli > 75 && helpHeli < 135) {
         heliRotZ = heliRotZ + 0.15;
     }
-    if (helpHeli > 135) {
+    //move 
+    if (helpHeli > 135 && helpHeli < 220) {
         helimoveX = helimoveX - 0.5;
         helimoveZ = helimoveZ + 0.5;
+    }
+    //z bend back
+    if (helpHeli > 170 && helpHeli < 220) {
+        heliRotZ = heliRotZ - 0.15;
+    }
+    //turn back
+    if (helpHeli > 220 && helpHeli < 310) {
+        heliRotY+=2;
+    }
+    //z bend towards
+    if (helpHeli > 220 && helpHeli < 270) {
+        heliRotZ = heliRotZ + 0.15;
+    }
+    //come back
+    if (helpHeli > 310 && helpHeli < 390) {
+        helimoveX = helimoveX + 0.5;
+        helimoveZ = helimoveZ - 0.5;
+    }
+    //z bend back
+    if (helpHeli > 355 && helpHeli < 405) {
+        heliRotZ = heliRotZ - 0.15;
+    }
+    //down
+    if (helpHeli > 405 && helpHeli < 530) {
+        helimoveY = helimoveY - 0.08;
+        heliRotY++;
     }
 
    /* if (helpHeli == 150) {
@@ -432,15 +478,15 @@ void timer(int x) {
 
 
     //minigun rotation
-    if (minigunRothelper < 90) {
+    if (minigunRotHelper < 90) {
         minigunRot+=2;
     }
     else {
         minigunRot = minigunRot - 2;
     }
 
-    if (minigunRothelper == 180) {
-        minigunRothelper = 0;
+    if (minigunRotHelper == 180) {
+        minigunRotHelper = 0;
     }
    
     glutPostRedisplay();

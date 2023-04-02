@@ -90,3 +90,6 @@ void radarMachine(float angle);
 void helicopter(float angle);
 //can be found in helicopter.cpp
 void helipad();
+
+//can be found in armorTank.cpp
+void armorTank(float tankWheel, float tankTurrent);

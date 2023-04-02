@@ -426,13 +426,6 @@ void secondFloor() {
     glPopMatrix();
 }
 
-void largeBuilding2() {
-    //second floor
-    secondFloor();
-
-    //bottom fllor
-    bottomFloor();
-}
 void largeBuilding() {
 
     glPushMatrix();
