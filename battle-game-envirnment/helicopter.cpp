@@ -44,15 +44,13 @@ void heliBody() {
 void clippedHeliBody() {
 
 	//clip back
-	glPushMatrix();
+	
 	glEnable(GL_CLIP_PLANE0);
 	double backPlaneEq[] = { -1.0, 0.0, 0.0, 0.5}; //clip plane equaton
 	glClipPlane(GL_CLIP_PLANE0, backPlaneEq);
 
-	glPushMatrix();
 	heliBody();
 
-	glPopMatrix();
 	glDisable(GL_CLIP_PLANE0);
 
 
@@ -62,10 +60,8 @@ void clippedHeliBody() {
 	double frontPlaneEq[] = { 1.0, 0.0, 0.0, -2.5 }; //clip plane equaton
 	glClipPlane(GL_CLIP_PLANE0, frontPlaneEq);
 
-	glPushMatrix();
 	heliBody();
 
-	glPopMatrix();
 	glDisable(GL_CLIP_PLANE0);
 
 
@@ -74,10 +70,8 @@ void clippedHeliBody() {
 	double topPlaneEq[] = { 0.0, 1.0, 0.0, -0.5 }; //clip plane equaton
 	glClipPlane(GL_CLIP_PLANE0, topPlaneEq);
 
-	glPushMatrix();
 	heliBody();
 
-	glPopMatrix();
 	glDisable(GL_CLIP_PLANE0);
 
 
@@ -86,10 +80,8 @@ void clippedHeliBody() {
 	double bottomPlaneEq[] = { 0.0, -1.0, 0.0, -0.75 }; //clip plane equaton
 	glClipPlane(GL_CLIP_PLANE0, bottomPlaneEq);
 
-	glPushMatrix();
 	heliBody();
 
-	glPopMatrix();
 	glDisable(GL_CLIP_PLANE0);
 
 }
@@ -178,15 +170,18 @@ void heliTailRotter() {
 	//position rotter blades
 	glPushMatrix();
 	glTranslatef(0, 0.4, 0);
+	glPushMatrix();
 	//generate rotter bales
 	for (int i = 0; i < 4; i++) {
+
 		glPushMatrix();
 		glRotatef(90 * i, 0, 1, 0);
-		glRotatef(45, 0, 1, 0);
 		glScalef(0.1, 0.5, 0.5);
 		heliRotterBlade();
 		glPopMatrix();
+
 	}
+	glPopMatrix();
 	glPopMatrix();
 
 }
@@ -234,7 +229,7 @@ void heliEngine() {
 
 	//engine holder
 	glPushMatrix();
-	glColor3f(0, 0, 1);
+	glColor3f(0.49, 0.49, 0.49);
 	glScalef(2, 0.5, 1);
 	glutSolidSphere(1, 10, 10);
 	glPopMatrix();
@@ -270,30 +265,38 @@ void heliStand() {
 
 //assemble helicopter
 void assembleHelicopter(float angle) {
-
+	//heli body
 	glPushMatrix();
 	glScalef(1, 0.5, 0.5);
 	clippedHeliBody();
 	glPopMatrix();
 
+	//bck
 	backSecction(angle);
 
 	glPushMatrix();
 	glTranslatef(2, 0.5, 0);
-
+	//engine
 	glPushMatrix();
 	glTranslatef(-0.5, 0, 0);
 	glScalef(0.5, 1, 0.5);
 	heliEngine();
 	glPopMatrix();
 	
+	//main rotter
+	glPushMatrix();
 	glRotatef(angle, 0, 1, 0);
 	heliMainRotter();
+	glPopMatrix();
+
 	glPopMatrix();
 }
 
 //whole helicopter
 void helicopter(float angle) {
+	
+	glColor3f(0.49, 0.49, 0.49);
+
 	glPushMatrix();
 	glTranslatef(0, 1, 0);
 	assembleHelicopter(angle);
@@ -309,5 +312,61 @@ void helicopter(float angle) {
 	heliStand();
 	glPopMatrix();
 
+
+}
+
+//daw H 
+void letterH(){
+	
+	//left length
+	glPushMatrix();
+	glTranslatef(0, 0, -2);
+	glScalef(5, 0.01, 0.4);
+	glColor3f(0.86, 0.59, 0);
+	glutSolidCube(1);
+	glPopMatrix();
+
+
+	
+	//right length
+
+	glPushMatrix();
+	glTranslatef(0, 0, 2);
+	glScalef(5, 0.01, 0.4);
+	glColor3f(0.86, 0.59, 0);
+	glutSolidCube(1);
+	glPopMatrix();
+
+
+	//middle
+	glPushMatrix();
+	glScalef(0.4, 0.01, 4);
+	glColor3f(0.86, 0.59, 0);
+	glutSolidCube(1);
+	glPopMatrix();
+
+
+}
+
+//create helipad
+void helipad() {
+
+	//cretae back circle
+	glPushMatrix();
+	glRotatef(90, 1, 0, 0);
+	glColor3f(0, 0, 0);
+	cylinderWithCap(5, 5, 0.01, 20);
+	glPopMatrix();
+
+	//ring
+	glPushMatrix();
+	glScalef(8, 1, 8);
+	glRotatef(90, 1, 0, 0);
+	glColor3f(1, 1, 1);
+	glutSolidTorus(0.05, 0.5, 100, 100);
+	glPopMatrix();
+
+
+	letterH();
 
 }

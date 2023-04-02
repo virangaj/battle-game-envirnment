@@ -327,7 +327,7 @@ void groundMiniGunBase(float angle) {
     //mini gun
     glPushMatrix();
     glScalef(0.25, 0.25, 0.25);
-    machineGun(angle);
+    machineGun(angle, 1);
     glPopMatrix();
     
 

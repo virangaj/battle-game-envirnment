@@ -225,3 +225,112 @@ void containerBox(int open, float r, float g, float b) {
 	//containerBoxfrontFace();
 
 }
+
+
+
+
+//wooden box Row
+void woodenBoxSingleRaw() {
+	float n = 2;
+	glPushMatrix();
+
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glColor3f(0.42, 0.251, 0.129);
+	glVertex3f(-n, 0, n / 4);
+
+	glColor3f(0.11, 0.047, 0);
+	glVertex3f(n, 0, n / 4);
+
+	glColor3f(0.42, 0.251, 0.129);
+	glVertex3f(n, 0, -n / 4);
+
+	glColor3f(0.11, 0.047, 0);
+	glVertex3f(-n, 0, -n / 4);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0, 0, 0);
+	glLineWidth(1.5);
+	glBegin(GL_LINES);
+	glVertex3f(-n, 0, n / 4);
+	glVertex3f(n, 0, n / 4);
+
+	glVertex3f(-n, 0, -n / 4);
+	glVertex3f(n, 0, -n / 4);
+
+	glVertex3f(n, 0, -n / 4);
+	glVertex3f(n, 0, n / 4);
+
+	glVertex3f(-n, 0, -n / 4);
+	glVertex3f(-n, 0, n / 4);
+
+	glEnd();
+	glLineWidth(1);
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+//box border
+void drawBoxBorder() {
+	glPushMatrix();
+	glColor3f(0.922, 0.565, 0.314);
+	glScalef(4, 0.1, 0.2);
+	glutSolidCube(1);
+	glPopMatrix();
+}
+
+//box side
+void woodenBoxSide() {
+	float n = 2;
+	glPushMatrix();
+
+	glPushMatrix();
+	for (float i = -(3 * n / 4); i < n; i += n / 4) {
+		glPushMatrix();
+		glTranslatef(0, 0, i);
+		woodenBoxSingleRaw();
+		glPopMatrix();
+	}
+	glPopMatrix();
+
+	glPushMatrix();
+	for (float i = 0; i < 360; i += 90) {
+		glPushMatrix();
+		glRotatef(i, 0, 1, 0);
+		glTranslatef(0, 0.05, -2);
+		drawBoxBorder();
+		glPopMatrix();
+	}
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+//full bpx
+void woodenBox() {
+	glPushMatrix();
+	for (float i = 0; i < 360; i += 90) {
+		glPushMatrix();
+		glRotatef(i, 0, 0, 1);
+		glTranslatef(0, 2, 0);
+		woodenBoxSide();
+		glPopMatrix();
+	}
+
+	glPushMatrix();
+	glRotatef(90, 1, 0, 0);
+	glTranslatef(0, 2, 0);
+	woodenBoxSide();
+	glPopMatrix();
+
+	glPushMatrix();
+	glRotatef(-90, 1, 0, 0);
+	glTranslatef(0, 2, 0);
+	woodenBoxSide();
+	glPopMatrix();
+
+	glPopMatrix();
+}

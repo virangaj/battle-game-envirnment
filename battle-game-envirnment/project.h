@@ -70,7 +70,9 @@ void halfCylinderWithoutCaps(float br, float tr, float h, int slices);
 
 
 //can be found in machineGun.cpp
-void machineGun(float angle);
+void machineGun(float angle, int laserVisible);
+//can be found in machineGun.cpp
+void miniGun(int laserVisible);
 
 //can be found in fence.cpp
 void drawFenceRow(int number);
@@ -78,9 +80,13 @@ void drawFenceRow(int number);
 
 //can be found in boxes.cpp
 void containerBox(int open, float r, float g, float b);
+//can be found in boxes.cpp
+void woodenBox();
 
 //can be found in radarSet.cpp
 void radarMachine(float angle);
 
-//can béfound in helicopter.cpp
+//can be found in helicopter.cpp
 void helicopter(float angle);
+//can be found in helicopter.cpp
+void helipad();

@@ -17,7 +17,7 @@ void laser() {
 }
 
 
-void machineGunBarrel() {
+void machineGunBarrel(int laserVisible) {
 	float angle = 0.0;
 	float x2 = 0.0;
 	float y2 = 0.0;
@@ -32,7 +32,9 @@ void machineGunBarrel() {
 		glPopMatrix();
 		angle = angle + PI/3;
 	}
-	laser();
+	if (laserVisible == 1) {
+		laser();
+	}
 
 	//round large baller holder
 	glPushMatrix();
@@ -149,7 +151,7 @@ void miniGunHolder() {
 	}
 }
 
-void miniGun() {
+void miniGun(int laserVisible) {
 
 	glPushMatrix();
 	glTranslatef(0, 0, -2);
@@ -159,19 +161,23 @@ void miniGun() {
 	
 	glPushMatrix();
 	glTranslatef(0, 0, 1);
-	machineGunBarrel();
+	machineGunBarrel(laserVisible);
 	glPopMatrix();
 }
 
 
 
-void machineGun(float angle) {
+void machineGun(float angle, int laserVisible) {
 	glPushMatrix();
 	glTranslatef(0, 2.5, 0.2);
+
 	glRotatef(angle, 0, 1, 0);
 	glRotatef(5, 1, 0, 0);
+	glRotatef(90, 0, 1, 0);
+
 	glScalef(1, 1, 1.5);
-	miniGun();
+
+	miniGun(laserVisible);
 	glPopMatrix();
 
 	glColor3f(0, 0, 0);

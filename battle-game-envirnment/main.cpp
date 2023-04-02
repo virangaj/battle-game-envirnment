@@ -15,6 +15,10 @@ GLfloat sceY = 0.0;
 GLfloat sceZ = 0.0;
 GLfloat steps = 1.0f;
 
+float heliRotX = 0, heliRotY = 0, heliRotZ = 0, helimoveX = 0, helimoveY = 0, helimoveZ = 0, helpHeli = 0;
+
+
+
 float artellaryBarrelAngle = 0.0;
 float minigunRot = 0.0f, minigunRothelper = 0.0f;
 int frame = 0;
@@ -60,26 +64,55 @@ void placeLightning() {
 }
 
 
-void createScene() {
+//helicopter animation function
+void helicopterAnimation() {
+    glPushMatrix();
+    glTranslatef(22, 0, -10);
+
+    //animation section
+    glPushMatrix();
+
+    //move heli
+    glTranslatef(helimoveX,helimoveY,helimoveZ);
+
+    //rotate heli
+    glRotatef(heliRotX, 1, 0, 0);
+    glRotatef(-heliRotY, 0, 1, 0);
+    glRotatef(-heliRotZ, 0, 0, 1);
+
+    glScalef(0.8, 0.8, 0.8);
+    helicopter(frame * 20);
     
+
+    glPopMatrix();
+
+    glPopMatrix();
+
+}
+
+//display the whole scene
+void createScene() {
 
     const double t = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
     double a = t * 90.0;
     double aa = a;
 
-    //glPushMatrix();
     //glRotated(aa, 0, 1, 0);
     //glTranslatef(-10, 10, -10);
     //glRotatef(-30, 0, 0, 1);
     //groupPlanes();
     //glPopMatrix();
 
+
+
+
     //watch tower
-    //front right tower
+   //front right tower
+
     glPushMatrix();
     glTranslatef(10, 0, 10);
     glRotatef(180, 0, 1, 0);
-    watchTower(minigunRot + 20);
+    watchTower(minigunRot);
     glPopMatrix();
 
     //front left tower
@@ -101,16 +134,18 @@ void createScene() {
     glTranslatef(10, 0, -10);
     watchTower(minigunRot);
     glPopMatrix();
+   
 
+
+    //large building
     glPushMatrix();
     glRotatef(-90, 0, 1, 0);
     largeBuilding();
     glPopMatrix();
 
 
-
     //place the trees
-    for (float i = -6; i < 8; i+=4) {
+    for (float i = -6; i < 8; i += 4) {
         glPushMatrix();
         glTranslatef(10, 0, i);
         glScalef(0.2, 0.2, 0.2);
@@ -118,12 +153,13 @@ void createScene() {
         glPopMatrix();
     }
 
+
     //place the lamp towers
     for (float i = -15; i < 15; i += 5) {
 
         glPushMatrix();
         glTranslatef(13, 0, i);
-        if (fmod(i,3) == 0) {
+        if (fmod(i, 3) == 0) {
             lampTower(frame, 1);
         }
         else {
@@ -131,7 +167,7 @@ void createScene() {
         }
         glPopMatrix();
     }
-   
+
     //broken trees dues to plane crash
     glPushMatrix();
     glTranslatef(-10, 0, -6);
@@ -168,29 +204,20 @@ void createScene() {
     brokenPlane();
     glPopMatrix();
 
-    //place arteryGun
-    glPushMatrix();
-    glTranslatef(-8, 0, -24);
-    arteryGun(artellaryBarrelAngle);
-    glPopMatrix();
 
-    glPushMatrix();
-    glTranslatef(8, 0, -24);
-    arteryGun(artellaryBarrelAngle);
-    glPopMatrix();
-
-      
+    //place mini gun
     glPushMatrix();
     glTranslatef(-3, 0, 18);
     glScalef(0.5, 0.5, 0.5);
-    groundMiniGunBase(minigunRot);
+    groundMiniGunBase(-minigunRot);
     glPopMatrix();
 
     glPushMatrix();
     glTranslatef(3, 0, 18);
     glScalef(0.5, 0.5, 0.5);
-    groundMiniGunBase(minigunRot - 180);
+    groundMiniGunBase(-minigunRot);
     glPopMatrix();
+
 
     //place container boxes
     for (float i = -10; i < 10; i+=6) {
@@ -208,25 +235,35 @@ void createScene() {
         }
     }
 
+    //place arteryGun
+   
+   /* glPushMatrix();
+    glTranslatef(-8, 0, -24);
+    arteryGun(artellaryBarrelAngle);
+    glPopMatrix();*/
+
     //place radars
     glPushMatrix();
-    glTranslatef(22, 0, 10);
+    glTranslatef(22, 0, 5);
     glScalef(0.6, 0.6, 0.6);
     radarMachine(frame);
     glPopMatrix();
-   
+
     //place helicopter 
+    helicopterAnimation();
+   
+
+    //place helicopter pad
     glPushMatrix();
     glTranslatef(22, 0, -10);
-    glScalef(0.8, 0.8, 0.8);
-    helicopter(frame*20);
+    helipad();
     glPopMatrix();
 
-    glPopMatrix();
 
+    //place gound
+    glPushMatrix();
     ground();
     glPopMatrix();
-
 }
 
 void display() {
@@ -248,19 +285,18 @@ void display() {
     glTranslatef(sceX, sceY, sceZ);
    
     glRotatef(sRy, 0, 1, 0);
-     //house
 
     glPushMatrix();
-    createScene();
+    //createScene();
 
-    //helicopter(frame * 20);
-
+    /*helicopter(frame * 20);
+    helipad();*/
    
+    largeBuilding();
     //ground();
 
-   
-    //drawGrid();
-    //drawAxis();
+    drawGrid();
+    drawAxis();
     glPopMatrix();
 
     glPopMatrix();
@@ -374,7 +410,28 @@ void keyPress(unsigned char key, int x, int y) {
 void timer(int x) {
     frame++;
     minigunRothelper++;
+    helpHeli++;
 
+
+    //helicopter movement
+    if (helpHeli < 135) {
+        heliRotY++;
+        helimoveY = helimoveY + 0.08;
+    }
+    if (helpHeli > 75 && helpHeli < 135) {
+        heliRotZ = heliRotZ + 0.15;
+    }
+    if (helpHeli > 135) {
+        helimoveX = helimoveX - 0.5;
+        helimoveZ = helimoveZ + 0.5;
+    }
+
+   /* if (helpHeli == 150) {
+        helimoveX, helimoveZ, heliRotY, helimoveY, heliRotZ, helpHeli = 0;
+    }*/
+
+
+    //minigun rotation
     if (minigunRothelper < 90) {
         minigunRot+=2;
     }
@@ -385,12 +442,9 @@ void timer(int x) {
     if (minigunRothelper == 180) {
         minigunRothelper = 0;
     }
-
-
- 
    
     glutPostRedisplay();
-    glutTimerFunc(120.0, timer, 1);
+    glutTimerFunc(60.0, timer, 1);
 }
 
 void reshape(GLsizei w, GLsizei h) {

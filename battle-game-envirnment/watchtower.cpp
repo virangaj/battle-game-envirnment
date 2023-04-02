@@ -270,8 +270,8 @@ void watchTower(float angle) {
 	glPushMatrix();
 	glTranslatef(0, 0, -0.5);
 	glScalef(0.25, 0.25, 0.25);
-	glRotatef(180, 0, 1, 0);
-	machineGun(angle);
+	glRotatef(90, 0, 1, 0);
+	machineGun(angle, 1);
 	glPopMatrix();
 	towerFloorBase();
 	glPopMatrix();

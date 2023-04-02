@@ -3,7 +3,7 @@
 
 //draw axis
 
-GLfloat x = 50;
+GLfloat x = 30;
 
 
 void drawAxis() {
@@ -128,7 +128,7 @@ void road() {
     //right road
     glPushMatrix();
     glTranslatef(15, 0, 0);
-    glScalef(1, 1, 40);
+    glScalef(1, 1, 20);
     straightRoad();
     glPopMatrix();
 

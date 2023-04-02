@@ -17,10 +17,10 @@ void halfCylinderArea() {
 
     for (float i = -length / 2; i < length / 2; i+=0.2) {        
         glPushMatrix();
-        glTranslatef(i, 0, 0);
+        glTranslatef(i, -1, 0);
         glPushMatrix();
         glColor3f(0.53, 0.38, 0.38);
-        glScalef(0.2, 1, 0.2);
+        glScalef(0.2, 2, 0.2);
         glRotatef(180, 0, 1, 0);
         glRotatef(-90, 1, 0, 0);
         halfCylinderWithCaps(1, 1, 1, 30);
@@ -330,6 +330,109 @@ void largeBuildingRoof() {
     glPopMatrix();
 }
 
+void scaledWoodBox() {
+    glPushMatrix();
+    glTranslatef(0, 1, 0);
+    glScalef(0.4, 0.4, 0.4);
+    woodenBox();
+    glPopMatrix();
+
+}
+
+
+
+
+// create a table leg
+void tableLeg() {
+
+    glPushMatrix();
+    glTranslatef(0, 0.7, 0);
+    glScalef(0.2, 1.4, 0.2);
+    glutSolidCube(1);
+    glPopMatrix();
+
+}
+
+//create a table
+void table() {
+
+    glPushMatrix();
+    glTranslatef(-2.5, 0, -1.25);
+    tableLeg();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-2.5, 0, 1.25);
+    tableLeg();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(2.5, 0, -1.25);
+    tableLeg();
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(2.5, 0, 1.25);
+    tableLeg();
+    glPopMatrix();
+
+
+    //table top
+    glPushMatrix();
+    glTranslatef(0, 1.4, 0);
+    glScalef(6, 0.05, 3);
+    glutSolidCube(1);
+    glPopMatrix();
+
+}
+
+//create bottom payment
+void bottomFloor() {
+
+    
+    for (float i = -length / 4; i < length / 4; i+=2) {
+        glPushMatrix();
+        glTranslatef(i, 0, -2);
+        scaledWoodBox();
+        glPopMatrix();
+    }
+    
+
+
+    glPushMatrix();
+    glTranslatef(0, 0, 2);
+    for (float i = -3; i < 3; i += 1) {
+        glPushMatrix();
+        glTranslatef(i+0.5, 1.6, 0.5);
+        glScalef(0.3, 0.3, 0.6);
+        glRotatef(180, 0, 1, 0);
+        miniGun(0);
+        glPopMatrix();
+    }
+    glColor3f(0.38, 0.14, 0);
+    table();
+    glPopMatrix();
+
+    
+    payment();
+    
+}
+
+//start of second floor
+void secondFloor() {
+    glPushMatrix();
+    glTranslatef(0, 3, 0);
+    payment();
+    glPopMatrix();
+}
+
+void largeBuilding2() {
+    //second floor
+    secondFloor();
+
+    //bottom fllor
+    bottomFloor();
+}
 void largeBuilding() {
 
     glPushMatrix();
@@ -345,6 +448,7 @@ void largeBuilding() {
     //back
     glPushMatrix();
     glTranslatef(0, 0, -length / 5);
+    glRotatef(180, 0, 1, 0);
     leftSideBuilding();
     glPopMatrix();
 
@@ -364,16 +468,13 @@ void largeBuilding() {
     glPopMatrix();
 
  
-    //start of second floor
-    glPushMatrix();
-    glTranslatef(0, 3, 0);
-    payment();
-    glPopMatrix();
+  
+    //second floor
+    secondFloor();
 
-    //create bottom payment
-    glPushMatrix();
-    payment();
-    glPopMatrix();
+    //bottom fllor
+    bottomFloor();
+   
 
     //create roof
     glPushMatrix();
