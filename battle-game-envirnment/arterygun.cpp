@@ -8,7 +8,7 @@
 
 
 
-GLfloat limitX = 5, limitY = 1;
+float limitY = 1;
 
 void draw_cylinder(GLfloat radius,
     GLfloat height,
@@ -247,11 +247,11 @@ void gunStructure(float angle) {
 
 }
 
-void pillowBarrier() {
+void pillowBarrier(float limitX) {
 
       
-    for (GLfloat i = -limitX; i < limitX + 3; i+=1.25) {
-        for (GLfloat j = 0 ; j < limitY; j+=0.25) {
+    for (float i = -limitX; i < limitX + 3; i+=1.25) {
+        for (float j = 0 ; j < limitY; j+=0.25) {
         
             glPushMatrix();
             glTranslatef(i, j, 0);
@@ -275,19 +275,19 @@ void arteryGun(float angle){
     //pillow baricade
     glPushMatrix();
     glTranslatef(0, 0, 4);
-    pillowBarrier();
+    pillowBarrier(5);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(-limitX, 0, -2);
+    glTranslatef(-5 - 1, 0, 0);
     glRotatef(90, 0, 1, 0);
-    pillowBarrier();
+    pillowBarrier(3);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(limitX + 3, 0, -2);
+    glTranslatef(5 + 3, 0, 0);
     glRotatef(90, 0, 1, 0);
-    pillowBarrier();
+    pillowBarrier(3);
     glPopMatrix();
 
 

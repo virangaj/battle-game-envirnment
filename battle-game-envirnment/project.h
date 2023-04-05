@@ -20,6 +20,11 @@ void brokenPlane();
 
 //can be found in watchTower.cpp
 void watchTower(float angle);
+//can be found in watchTower.cpp
+void cross();
+//can be found in watchTower.cpp
+void TowerLeg();
+
 
 //can be found in arterygun.cpp
 void arteryGun(float angle);
@@ -93,3 +98,7 @@ void helipad();
 
 //can be found in armorTank.cpp
 void armorTank(float tankWheel, float tankTurrent);
+
+
+//can be found in antenaTower.cpp
+void antenaTower(float angle);

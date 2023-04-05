@@ -3,7 +3,7 @@
 
 //draw axis
 
-GLfloat x = 30;
+GLfloat x = 40;
 
 
 void drawAxis() {
@@ -128,7 +128,7 @@ void road() {
     //right road
     glPushMatrix();
     glTranslatef(15, 0, 0);
-    glScalef(1, 1, 20);
+    glScalef(1, 1, 16);
     straightRoad();
     glPopMatrix();
 
@@ -140,14 +140,14 @@ void road() {
     straightRoad();
     glPopMatrix();
 
-    //middle front road
+    //front road
     glPushMatrix();
-    glTranslatef(5, 0, 15);
-    glScalef(20, 1, 1);
+    glTranslatef(-0.5, 0, 15);
+    glScalef(13.5, 1, 1);
     straightRoad();
     glPopMatrix();
 
-    //middle back road
+    //back road
     glPushMatrix();
     glTranslatef(0, 0, -17);
     glScalef(15, 1, 1);
@@ -163,13 +163,6 @@ void road() {
     glPopMatrix();
 
 
-    ////front right
-    //glPushMatrix();
-    //glTranslatef(15, 0, 15);
-    //roadConer();
-    //glPopMatrix();
-
-
     //back left
     glPushMatrix();
     glTranslatef(-16, 0, -16);
@@ -177,15 +170,52 @@ void road() {
     roadConer();
     glPopMatrix();
 
-    
-  
+
+    //front right
+    glPushMatrix();
+    glTranslatef(15, 0, 14);
+    glRotatef(0, 0, 1, 0);
+    roadConer();
+    glPopMatrix();
+
+}
+
+
+void createFence() {
+    glPushMatrix();
+    glTranslatef(0, 0, 22);
+    drawFenceRow(18);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(0, 0, -35);
+    drawFenceRow(18);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslatef(36, 0, -6);
+    glRotatef(90, 0, 1, 0);
+    drawFenceRow(14);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-36, 0, -6);
+    glRotatef(90, 0, 1, 0);
+    drawFenceRow(14);
+    glPopMatrix();
 }
 
 
 
 void ground() {
     groundPlane();
-
+    glPushMatrix();
+    glLineWidth(2);
+    glTranslatef(0, 2, 0);
+    createFence();
+    glPopMatrix();
 
     road();
 

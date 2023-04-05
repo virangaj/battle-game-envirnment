@@ -43,7 +43,7 @@ void placeLightning() {
     glMaterialfv(GL_FRONT, GL_SPECULAR, matwhite);
     glMaterialf(GL_FRONT, GL_SHININESS, 128.0f);
 
-    //glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT0);
     /* positioned the light source 1 */
     GLfloat position0[] = { 20.0,20.0,20.0,1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, position0);
@@ -54,15 +54,26 @@ void placeLightning() {
     GLfloat white[] = { 1.0,1.0,1.0,1.0 };
     glLightfv(GL_LIGHT0, GL_SPECULAR, white);
     
-    //glEnable(GL_LIGHT1);
+    glEnable(GL_LIGHT1);
     /* positioned the light source 2 */
-    GLfloat position1[] = { -20.0,20.0,-20.0,1.0 };
+    GLfloat position1[] = { -25.0,20.0,-25,1.0 };
     glLightfv(GL_LIGHT1, GL_POSITION, position1);
 
     /* set light intensities for light source 2 */
     glLightfv(GL_LIGHT1, GL_DIFFUSE, paleYellow);
     //GLfloat white[] = { 1.0,1.0,1.0,1.0 };
     glLightfv(GL_LIGHT1, GL_SPECULAR, white);
+
+
+    glEnable(GL_LIGHT2);
+    /* positioned the light source 2 */
+    GLfloat position2[] = { -25.0,20.0,25,1.0 };
+    glLightfv(GL_LIGHT2, GL_POSITION, position2);
+
+    /* set light intensities for light source 2 */
+    glLightfv(GL_LIGHT2, GL_DIFFUSE, paleYellow);
+    //GLfloat white[] = { 1.0,1.0,1.0,1.0 };
+    glLightfv(GL_LIGHT2, GL_SPECULAR, white);
     
 }
 
@@ -240,10 +251,10 @@ void createScene() {
 
     //place arteryGun
    
-   /* glPushMatrix();
+    glPushMatrix();
     glTranslatef(-8, 0, -24);
     arteryGun(artellaryBarrelAngle);
-    glPopMatrix();*/
+    glPopMatrix();
 
     //place radars
     glPushMatrix();
@@ -255,6 +266,13 @@ void createScene() {
     //place helicopter 
     helicopterTakeOffAnimation();
    
+
+    //place secondhelicopter 
+    glPushMatrix();
+    glTranslatef(22, 0, -25);
+    helicopter(0);
+    helipad();
+    glPopMatrix();
 
     //place helicopter pad
     glPushMatrix();
@@ -276,6 +294,16 @@ void createScene() {
     glScalef(0.6, 0.6, 0.6);
     armorTank(frame, minigunRot);
     glPopMatrix();
+
+
+    //place antena
+
+    glPushMatrix();
+    glTranslatef(-20, 0, -20);
+    antenaTower(frame);
+    glPopMatrix();
+  
+
 
     //place gound
     glPushMatrix();
@@ -307,10 +335,11 @@ void display() {
 
     glPushMatrix();
     createScene();
+    //ground();
   
-   
+  
 
-    /*drawGrid();
+   /* drawGrid();
     drawAxis();*/
     glPopMatrix();
 
@@ -396,16 +425,16 @@ void keyPress(unsigned char key, int x, int y) {
         case 'N':
             artellaryBarrelAngle -= 0.5;
         case '1':
-            glEnable(GL_LIGHT0);
+            //glEnable(GL_LIGHT0);
             break;
         case '!':
-            glDisable(GL_LIGHT0);
+            //glDisable(GL_LIGHT0);
             break;
         case '2':
-            glEnable(GL_LIGHT1);
+            //glEnable(GL_LIGHT1);
             break;
         case '@':
-            glDisable(GL_LIGHT1);
+            //glDisable(GL_LIGHT1);
             break;
         case '3':
             glPolygonMode(GL_FRONT, GL_LINE);
@@ -458,7 +487,7 @@ void timer(int x) {
         heliRotZ = heliRotZ + 0.15;
     }
     //come back
-    if (helpHeli > 310 && helpHeli < 390) {
+    if (helpHeli > 310 && helpHeli < 395) {
         helimoveX = helimoveX + 0.5;
         helimoveZ = helimoveZ - 0.5;
     }
@@ -467,7 +496,7 @@ void timer(int x) {
         heliRotZ = heliRotZ - 0.15;
     }
     //down
-    if (helpHeli > 405 && helpHeli < 530) {
+    if (helpHeli > 405 && helpHeli < 532) {
         helimoveY = helimoveY - 0.08;
         heliRotY++;
     }

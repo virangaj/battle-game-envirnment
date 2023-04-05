@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="antenaTower.cpp" />
     <ClCompile Include="armorTank.cpp" />
     <ClCompile Include="arterygun.cpp" />
     <ClCompile Include="arteryshells.cpp" />
